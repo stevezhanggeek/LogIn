@@ -1,10 +1,14 @@
 package com.unlocklog;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.frakbot.glowpadbackport.GlowPadView;
@@ -28,8 +32,12 @@ public class SampleActivity extends Activity {
         // initialize receiver
         startService(new Intent(this, MyService.class));
 
-
+        // Use user desktop wallpaper in lockscreen
+        final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+        final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
+        RelativeLayout ll = (RelativeLayout) findViewById(R.id.main);
+        ll.setBackground(wallpaperDrawable);
 
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override
