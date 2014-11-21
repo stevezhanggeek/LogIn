@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="incoming_call_widget_2way_targets">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/ic_lockscreen_glowdot</item>
+        <item>@drawable/ic_lockscreen_glowdot</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_glowdot</item>
+        <item>@drawable/ic_lockscreen_glowdot</item>
+    </array>
+</resources>
