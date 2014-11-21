@@ -1,4 +1,4 @@
-package net.frakbot.glowpadbackportsample;
+package com.unlocklog;
 
 import receiver.lockScreenReceiver;
 

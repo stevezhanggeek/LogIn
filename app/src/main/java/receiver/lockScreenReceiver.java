@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import android.widget.Toast;
 
-import net.frakbot.glowpadbackportsample.SampleActivity;
+import com.unlocklog.SampleActivity;
 
 public class lockScreenReceiver extends BroadcastReceiver  {
     public static boolean wasScreenOn = true;
