@@ -6,6 +6,7 @@
                 android:layout_height="fill_parent"
     android:id="@+id/main">
 
+
     <TextClock
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,17 +15,19 @@
         android:format24Hour = "kk:mm"
         android:textSize="80sp"
         android:layout_marginTop="40dp"
-        android:fontFamily="sans-serif-thin" />
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textClock"
-        android:textSize="40sp"
-        android:fontFamily="sans-serif-thin" />
+        android:fontFamily="sans-serif"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
     <net.frakbot.glowpadbackport.GlowPadView
         android:id="@+id/incomingCallWidget"

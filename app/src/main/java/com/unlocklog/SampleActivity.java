@@ -51,7 +51,33 @@ public class SampleActivity extends Activity {
 
             @Override
             public void onTrigger(View v, int target) {
-                Toast.makeText(SampleActivity.this, "Target triggered! ID=" + target, Toast.LENGTH_SHORT).show();
+                String sleepiness_description = "";
+                switch(target) {
+                    case 3:
+                        sleepiness_description = "Feeling active, vital, alert, or wide awake";
+                        break;
+                    case 4:
+                        sleepiness_description = "Functioning at high levels, but not at peak; able to concentrate";
+                        break;
+                    case 5:
+                        sleepiness_description = "Awake, but relaxed; responsive but not fully alert";
+                        break;
+                    case 6:
+                        sleepiness_description = "Somewhat foggy, let down";
+                        break;
+                    case 7:
+                        sleepiness_description = "Foggy; losing interest in remaining awake; slowed down";
+                        break;
+                    case 8:
+                        sleepiness_description = "Sleepy, woozy, fighting sleep; prefer to lie down";
+                        break;
+                    case 9:
+                        sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
+                        break;
+                }
+                if (!sleepiness_description.equals("")) {
+                    Toast.makeText(SampleActivity.this, sleepiness_description, Toast.LENGTH_SHORT).show();
+                }
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();
@@ -67,10 +93,34 @@ public class SampleActivity extends Activity {
             }
 
             @Override
-            public void onMovedOnTarget(int activeTarget) {
-                System.out.println(activeTarget);
+            public void onMovedOnTarget(int target) {
+                System.out.println(target);
                 final TextView txt = (TextView) findViewById(R.id.textView);
-                txt.setText(String.valueOf(activeTarget));
+                String sleepiness_description = "";
+                switch(target) {
+                    case 3:
+                        sleepiness_description = "Feeling active, vital, alert, or wide awake";
+                        break;
+                    case 4:
+                        sleepiness_description = "Functioning at high levels, but not at peak; able to concentrate";
+                        break;
+                    case 5:
+                        sleepiness_description = "Awake, but relaxed; responsive but not fully alert";
+                        break;
+                    case 6:
+                        sleepiness_description = "Somewhat foggy, let down";
+                        break;
+                    case 7:
+                        sleepiness_description = "Foggy; losing interest in remaining awake; slowed down";
+                        break;
+                    case 8:
+                        sleepiness_description = "Sleepy, woozy, fighting sleep; prefer to lie down";
+                        break;
+                    case 9:
+                        sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
+                        break;
+                }
+                txt.setText(sleepiness_description);
             }
         });
     }
