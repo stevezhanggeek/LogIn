@@ -996,6 +996,7 @@ public class GlowPadView extends View {
             }
             // Focus the new target
             if (activeTarget != -1) {
+                vibrate();
                 TargetDrawable target = targets.get(activeTarget);
                 if (target.hasState(TargetDrawable.STATE_FOCUSED)) {
                     target.setState(TargetDrawable.STATE_FOCUSED);
