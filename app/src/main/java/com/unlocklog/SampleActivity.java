@@ -34,7 +34,7 @@ public class SampleActivity extends Activity {
 
         // Use user desktop wallpaper in lockscreen
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+        final Drawable wallpaperDrawable = wallpaperManager.getFastDrawable();
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
         RelativeLayout ll = (RelativeLayout) findViewById(R.id.main);
         ll.setBackground(wallpaperDrawable);
