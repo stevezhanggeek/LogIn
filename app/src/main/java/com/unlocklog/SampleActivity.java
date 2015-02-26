@@ -42,7 +42,6 @@ public class SampleActivity extends Activity {
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override
             public void onGrabbed(View v, int handle) {
-                System.out.println("Start Touch");
             }
 
             @Override
@@ -120,6 +119,7 @@ public class SampleActivity extends Activity {
                         sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
                         break;
                 }
+                if (glowPad.mhandle == 0) sleepiness_description = "WTF";
                 txt.setText(sleepiness_description);
             }
         });

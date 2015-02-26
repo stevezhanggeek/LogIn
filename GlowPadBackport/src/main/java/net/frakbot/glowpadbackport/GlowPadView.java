@@ -207,6 +207,7 @@ public class GlowPadView extends View {
     private PointCloud mPointCloud;
     private float mInnerRadius;
     private int mPointerId;
+    public int mhandle = 0;
 
     public GlowPadView(Context context) {
         this(context, null);
@@ -356,6 +357,15 @@ public class GlowPadView extends View {
         return result;
     }
 
+    private void updateHandle(float x, float y) {
+        if (y - mHandleDrawable.getPositionY() < 0) {
+            mhandle = 0;
+        } else {
+            mhandle = 1;
+        }
+        System.out.println("Touched" + String.valueOf(x - mHandleDrawable.getPositionX()) + String.valueOf(y - mHandleDrawable.getPositionY()));
+    }
+
     private void switchToState(int state, float x, float y) {
         switch (state) {
             case STATE_IDLE:
@@ -371,6 +381,7 @@ public class GlowPadView extends View {
                 break;
 
             case STATE_FIRST_TOUCH:
+                updateHandle(x, y);
                 mHandleDrawable.setAlpha(0.0f);
                 deactivateTargets();
                 showTargets(true);
