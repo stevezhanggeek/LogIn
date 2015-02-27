@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import net.frakbot.glowpadbackport.GlowPadView;
 
 public class SampleActivity extends Activity {
+    private boolean grid_triggered = false;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,10 @@ public class SampleActivity extends Activity {
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         final Drawable wallpaperDrawable = wallpaperManager.getFastDrawable();
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
+        final ImageView moodGrid = (ImageView) findViewById(R.id.mood_grid);
         RelativeLayout ll = (RelativeLayout) findViewById(R.id.main);
         ll.setBackground(wallpaperDrawable);
+        grid_triggered = false;
 
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override
@@ -46,6 +51,11 @@ public class SampleActivity extends Activity {
 
             @Override
             public void onReleased(View v, int handle) {
+                if (grid_triggered) {
+                    moodGrid.setVisibility(View.INVISIBLE);
+                    
+                    finish();
+                }
             }
 
             @Override
@@ -72,6 +82,7 @@ public class SampleActivity extends Activity {
                         break;
                     case 9:
                         sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
+
                         break;
                 }
                 if (!sleepiness_description.equals("")) {
@@ -99,6 +110,10 @@ public class SampleActivity extends Activity {
                 switch(target) {
                     case 3:
                         sleepiness_description = "Feeling active, vital, alert, or wide awake";
+                        glowPad.setVisibility(View.GONE);
+                        glowPad.setVibrateEnabled(false);
+                        moodGrid.setVisibility(View.VISIBLE);
+                        grid_triggered = true;
                         break;
                     case 4:
                         sleepiness_description = "Functioning at high levels, but not at peak; able to concentrate";
@@ -119,7 +134,7 @@ public class SampleActivity extends Activity {
                         sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
                         break;
                 }
-                if (glowPad.mhandle == 0) sleepiness_description = "WTF";
+                if (glowPad.mhandle == 0) sleepiness_description = "Pleasure";
                 txt.setText(sleepiness_description);
             }
         });

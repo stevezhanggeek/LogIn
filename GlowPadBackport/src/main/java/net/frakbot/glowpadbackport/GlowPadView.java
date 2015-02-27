@@ -207,7 +207,12 @@ public class GlowPadView extends View {
     private PointCloud mPointCloud;
     private float mInnerRadius;
     private int mPointerId;
+
+    // Hack for "NEW" interfaces
     public int mhandle = 0;
+    public float mgrid_X = 0;
+    public float mgrid_Y = 0;
+
 
     public GlowPadView(Context context) {
         this(context, null);
@@ -366,6 +371,12 @@ public class GlowPadView extends View {
         System.out.println("Touched" + String.valueOf(x - mHandleDrawable.getPositionX()) + String.valueOf(y - mHandleDrawable.getPositionY()));
     }
 
+    private void updateGrid(float x, float y) {
+        mgrid_X = x - mHandleDrawable.getPositionX();
+        mgrid_Y = y - mHandleDrawable.getPositionY();
+        System.out.println("AgainTouched" + String.valueOf(x - mHandleDrawable.getPositionX()) + String.valueOf(y - mHandleDrawable.getPositionY()));
+    }
+
     private void switchToState(int state, float x, float y) {
         switch (state) {
             case STATE_IDLE:
@@ -381,6 +392,7 @@ public class GlowPadView extends View {
                 break;
 
             case STATE_FIRST_TOUCH:
+                // Hack for "NEW" interface(Two handles)
                 updateHandle(x, y);
                 mHandleDrawable.setAlpha(0.0f);
                 deactivateTargets();
@@ -408,6 +420,8 @@ public class GlowPadView extends View {
                 break;
 
             case STATE_FINISH:
+                // Hack for "NEW" interface(Grid)
+                updateGrid(x,y);
                 doFinish();
                 break;
         }
