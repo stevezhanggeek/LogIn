@@ -53,7 +53,7 @@ public class SampleActivity extends Activity {
             public void onReleased(View v, int handle) {
                 if (grid_triggered) {
                     moodGrid.setVisibility(View.INVISIBLE);
-                    
+                    Toast.makeText(SampleActivity.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -86,7 +86,7 @@ public class SampleActivity extends Activity {
                         break;
                 }
                 if (!sleepiness_description.equals("")) {
-                    Toast.makeText(SampleActivity.this, sleepiness_description, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SampleActivity.this, sleepiness_description, Toast.LENGTH_SHORT).show();
                 }
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
@@ -134,7 +134,7 @@ public class SampleActivity extends Activity {
                         sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
                         break;
                 }
-                if (glowPad.mhandle == 0) sleepiness_description = "Pleasure";
+                if (glowPad.mhandle == 0) sleepiness_description = "Pleasure " + String.valueOf(target);
                 txt.setText(sleepiness_description);
             }
         });

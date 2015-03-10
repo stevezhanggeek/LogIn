@@ -58,7 +58,8 @@
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_launcher"
-        android:layout_below="@+id/textView"/>
+        android:src="@drawable/mood_grid"
+        android:layout_below="@+id/textView"
+        android:background="#66FFFFFF" />
 
 </RelativeLayout>
