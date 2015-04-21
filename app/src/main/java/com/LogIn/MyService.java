@@ -1,4 +1,4 @@
-package com.unlocklog;
+package com.LogIn;
 
 import receiver.lockScreenReceiver;
 

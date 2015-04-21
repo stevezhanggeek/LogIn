@@ -1,13 +1,10 @@
 package receiver;
 
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import android.widget.Toast;
-
-import com.unlocklog.SampleActivity;
+import com.LogIn.SampleActivity;
 
 public class lockScreenReceiver extends BroadcastReceiver  {
     public static boolean wasScreenOn = true;

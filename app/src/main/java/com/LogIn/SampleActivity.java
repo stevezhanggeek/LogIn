@@ -1,4 +1,4 @@
-package com.unlocklog;
+package com.LogIn;
 
 import android.app.Activity;
 import android.app.WallpaperManager;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
