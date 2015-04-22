@@ -68,6 +68,8 @@ public class SlidingTabsBasicFragment extends Fragment {
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new SamplePagerAdapter());
+        // Max cache screens
+        mViewPager.setOffscreenPageLimit(mViewPager.getAdapter().getCount());
         // END_INCLUDE (setup_viewpager)
 
         // BEGIN_INCLUDE (setup_slidingtablayout)
@@ -89,7 +91,7 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 10;
+            return 13;
         }
 
         /**
@@ -111,7 +113,10 @@ public class SlidingTabsBasicFragment extends Fragment {
          */
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Day " + (position + 1);
+            if (position == 0) {
+                return "Add Log";
+            }
+            return "Day " + position;
         }
         // END_INCLUDE (pageradapter_getpagetitle)
 
@@ -121,17 +126,22 @@ public class SlidingTabsBasicFragment extends Fragment {
          */
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = new CalendarView(getActivity(), 1);
+            View view;
+            LayoutInflater inflater = LayoutInflater.from(container.getContext());
+            if (position == 0) {
+                view = inflater.inflate(R.layout.login_view,
+                        container, false);
+                container.addView(view);
+            } else {
+                view = inflater.inflate(R.layout.scroll_view,
+                        container, false);
+                container.addView(view);
 
-            /*
-            getActivity().setContentView(R.layout.scroll_view);
-            LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.linearView);
-            layout.addView(view);
-            ScrollView scrollView = (ScrollView) getActivity().findViewById(R.id.scrollView);
-            */
+                // Let view know which page it is
+                CalendarView cal = (CalendarView) view.findViewById(R.id.CalendarView);
+                cal.setPageIndex(position);
 
-            container.addView(view);
-
+            }
             return view;
         }
 

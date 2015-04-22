@@ -10,5 +10,11 @@
         android:id="@+id/linearView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        </LinearLayout>
+
+        <com.LogIn.CalendarView
+            android:layout_width="match_parent"
+            android:layout_height="3100px"
+            android:id="@+id/CalendarView" />
+
+    </LinearLayout>
 </ScrollView>
