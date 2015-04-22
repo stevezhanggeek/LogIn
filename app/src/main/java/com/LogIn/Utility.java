@@ -28,6 +28,9 @@ public class Utility extends Activity {
     public static int year_start = 2015;
     public static int month_start = 3; // start from 0
     public static int day_start = 21;
+    public static int hour_start = 10;
+    public static int num_hour_experiment_length = 10;
+
     public static List<ParseObject> m_valueList;
     public static ViewPager m_vp;
 
@@ -73,7 +76,7 @@ public class Utility extends Activity {
     }
 
     public static void parseWrite(final int value) {
-        ParseObject parseObj = new ParseObject("LogIn");
+        ParseObject parseObj = new ParseObject("Logs");
         parseObj.put("deviceID", deviceID);
         parseObj.put("value", value);
         parseObj.put("time", new Date());
@@ -81,8 +84,8 @@ public class Utility extends Activity {
         parseObj.pinInBackground();
     }
 
-    public static List<ParseObject> updateParse() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("LogIn");
+    public static List<ParseObject> getDataFromParse() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Logs");
         query.fromLocalDatastore();
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> valueList, ParseException e) {

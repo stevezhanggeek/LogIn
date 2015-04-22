@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity {
         startActivity(new Intent(this, StartLockScreen.class));
 
         Parse.enableLocalDatastore(getApplicationContext());
-        Parse.initialize(this, "9DNSMkDuMcOv0Mi918JSe1CfMlkBPQ9UJVp8ksQB", "Qo53m1lBF7kXzbdP0OJ8bbL1OH6AuJnZbFRyOI4K");
+        Parse.initialize(this, "PYRCXauUEwux9LbJtA4mp1KptYj3XRd1W1c7ukZI", "55XOAxJQEnsr7X6uIPzRzCaDDVLQDgLOFVa9DRba");
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         ParseACL.setDefaultACL(defaultACL, true);
@@ -52,7 +52,6 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 ViewPager vp = (ViewPager) findViewById(R.id.viewpager);
                 vp.setCurrentItem(0, true);
-                vp.setAdapter(new SamplePagerAdapter());
             }
         });
 

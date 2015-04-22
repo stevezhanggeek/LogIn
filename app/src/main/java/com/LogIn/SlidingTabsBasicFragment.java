@@ -144,7 +144,7 @@ class SamplePagerAdapter extends PagerAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Utility.parseWrite(seekBar.getProgress() + 1);
-                    Utility.updateParse();
+                    Utility.getDataFromParse();
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override

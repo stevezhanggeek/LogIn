@@ -59,34 +59,9 @@ public class SampleActivity extends Activity {
 
             @Override
             public void onTrigger(View v, int target) {
-                String sleepiness_description = "";
-                switch(target) {
-                    case 3:
-                        sleepiness_description = "Feeling active, vital, alert, or wide awake";
-                        break;
-                    case 4:
-                        sleepiness_description = "Functioning at high levels, but not at peak; able to concentrate";
-                        break;
-                    case 5:
-                        sleepiness_description = "Awake, but relaxed; responsive but not fully alert";
-                        break;
-                    case 6:
-                        sleepiness_description = "Somewhat foggy, let down";
-                        break;
-                    case 7:
-                        sleepiness_description = "Foggy; losing interest in remaining awake; slowed down";
-                        break;
-                    case 8:
-                        sleepiness_description = "Sleepy, woozy, fighting sleep; prefer to lie down";
-                        break;
-                    case 9:
-                        sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
-
-                        break;
-                }
-                if (!sleepiness_description.equals("")) {
-                    //Toast.makeText(SampleActivity.this, sleepiness_description, Toast.LENGTH_SHORT).show();
-                }
+                Utility.parseWrite(target - 2);
+                String sleepiness_description = Utility.convertSleepinessValueToDescription(target - 2);
+                Toast.makeText(SampleActivity.this, sleepiness_description, Toast.LENGTH_SHORT).show();
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();
@@ -105,35 +80,16 @@ public class SampleActivity extends Activity {
             public void onMovedOnTarget(int target) {
                 System.out.println(target);
                 final TextView txt = (TextView) findViewById(R.id.textView);
-                String sleepiness_description = "";
-                switch(target) {
-                    case 3:
-                        sleepiness_description = "Feeling active, vital, alert, or wide awake";
-                        glowPad.setVisibility(View.GONE);
-                        glowPad.setVibrateEnabled(false);
-                        moodGrid.setVisibility(View.VISIBLE);
-                        grid_triggered = true;
-                        break;
-                    case 4:
-                        sleepiness_description = "Functioning at high levels, but not at peak; able to concentrate";
-                        break;
-                    case 5:
-                        sleepiness_description = "Awake, but relaxed; responsive but not fully alert";
-                        break;
-                    case 6:
-                        sleepiness_description = "Somewhat foggy, let down";
-                        break;
-                    case 7:
-                        sleepiness_description = "Foggy; losing interest in remaining awake; slowed down";
-                        break;
-                    case 8:
-                        sleepiness_description = "Sleepy, woozy, fighting sleep; prefer to lie down";
-                        break;
-                    case 9:
-                        sleepiness_description = "No longer fighting sleep, sleep onset soon; having dream-like thoughts";
-                        break;
+                String sleepiness_description = Utility.convertSleepinessValueToDescription(target - 2);
+
+                if (target == 3) {
+                    glowPad.setVisibility(View.GONE);
+                    glowPad.setVibrateEnabled(false);
+                    moodGrid.setVisibility(View.VISIBLE);
+                    grid_triggered = true;
                 }
-                if (glowPad.mhandle == 0) sleepiness_description = "Pleasure " + String.valueOf(target);
+                if (glowPad.mhandle == 0)
+                    sleepiness_description = "Pleasure " + String.valueOf(target);
                 txt.setText(sleepiness_description);
             }
         });

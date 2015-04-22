@@ -31,7 +31,7 @@ public class CalendarView extends View {
 
     private void init() {
         mCanvas = new Canvas();
-        m_valueList = Utility.updateParse();
+        m_valueList = Utility.getDataFromParse();
     }
 
     public CalendarView(Context context) {
@@ -63,14 +63,12 @@ public class CalendarView extends View {
         int textSize = 30;
         paint.setColor(Color.BLACK);
         paint.setTextSize(textSize);
-        int start_time_hour = 8;
-        int length_hour = 10;
         int hour_vertical_interval = 300;
         int text_width = 100;
 
         paint.setAntiAlias(true);
-        for (int i = start_time_hour; i < start_time_hour + length_hour; i++) {
-            int y = (i - start_time_hour + 1) * hour_vertical_interval;
+        for (int i = Utility.hour_start; i < Utility.hour_start + Utility.num_hour_experiment_length; i++) {
+            int y = (i - Utility.hour_start + 1) * hour_vertical_interval;
             canvas.drawText(i + ":00", 10, y + textSize / 2, paint);
             canvas.drawLine(text_width, y, width, y, paint);
         }
@@ -91,7 +89,7 @@ public class CalendarView extends View {
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
                     int minute = cal.get(Calendar.MINUTE);
 
-                    int startY = hour_vertical_interval + (int) ((hour - start_time_hour + (double) minute / 60) * hour_vertical_interval);
+                    int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
                     paint.setColor(Utility.convertSleepinessValueToColor(value));
                     RectF rf = new RectF(startX, startY, startX + (width - text_width) / 7 - 10, startY + 20);
                     canvas.drawRoundRect(rf, 15, 15, paint);
