@@ -24,8 +24,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class SlidingTabsBasicFragment extends Fragment {
 
@@ -80,79 +83,104 @@ public class SlidingTabsBasicFragment extends Fragment {
         // END_INCLUDE (setup_slidingtablayout)
     }
     // END_INCLUDE (fragment_onviewcreated)
+}
+
+
+/**
+ * The {@link android.support.v4.view.PagerAdapter} used to display pages in this sample.
+ * The individual pages are simple and just display two lines of text. The important section of
+ * this class is the {@link #getPageTitle(int)} method which controls what is displayed in the
+ * {@link SlidingTabLayout}.
+ */
+class SamplePagerAdapter extends PagerAdapter {
+
+    @Override
+    public int getCount() {
+        return Utility.num_days_experiment_length+1;
+    }
 
     /**
-     * The {@link android.support.v4.view.PagerAdapter} used to display pages in this sample.
-     * The individual pages are simple and just display two lines of text. The important section of
-     * this class is the {@link #getPageTitle(int)} method which controls what is displayed in the
-     * {@link SlidingTabLayout}.
+     * @return true if the value returned from {@link #instantiateItem(ViewGroup, int)} is the
+     * same object as the {@link View} added to the {@link ViewPager}.
      */
-    class SamplePagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return 13;
-        }
-
-        /**
-         * @return true if the value returned from {@link #instantiateItem(ViewGroup, int)} is the
-         * same object as the {@link View} added to the {@link ViewPager}.
-         */
-        @Override
-        public boolean isViewFromObject(View view, Object o) {
-            return o == view;
-        }
-
-        // BEGIN_INCLUDE (pageradapter_getpagetitle)
-        /**
-         * Return the title of the item at {@code position}. This is important as what this method
-         * returns is what is displayed in the {@link SlidingTabLayout}.
-         * <p>
-         * Here we construct one using the position value, but for real application the title should
-         * refer to the item's contents.
-         */
-        @Override
-        public CharSequence getPageTitle(int position) {
-            if (position == 0) {
-                return "Add Log";
-            }
-            return "Day " + position;
-        }
-        // END_INCLUDE (pageradapter_getpagetitle)
-
-        /**
-         * Instantiate the {@link View} which should be displayed at {@code position}. Here we
-         * inflate a layout from the apps resources and then change the text view to signify the position.
-         */
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view;
-            LayoutInflater inflater = LayoutInflater.from(container.getContext());
-            if (position == 0) {
-                view = inflater.inflate(R.layout.login_view,
-                        container, false);
-                container.addView(view);
-            } else {
-                view = inflater.inflate(R.layout.scroll_view,
-                        container, false);
-                container.addView(view);
-
-                // Let view know which page it is
-                CalendarView cal = (CalendarView) view.findViewById(R.id.CalendarView);
-                cal.setPageIndex(position);
-
-            }
-            return view;
-        }
-
-        /**
-         * Destroy the item from the {@link ViewPager}. In our case this is simply removing the
-         * {@link View}.
-         */
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-
+    @Override
+    public boolean isViewFromObject(View view, Object o) {
+        return o == view;
     }
+
+    // BEGIN_INCLUDE (pageradapter_getpagetitle)
+    /**
+     * Return the title of the item at {@code position}. This is important as what this method
+     * returns is what is displayed in the {@link SlidingTabLayout}.
+     * <p>
+     * Here we construct one using the position value, but for real application the title should
+     * refer to the item's contents.
+     */
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (position == 0) {
+            return "Add Log";
+        }
+        return "Day " + position;
+    }
+    // END_INCLUDE (pageradapter_getpagetitle)
+
+    /**
+     * Instantiate the {@link View} which should be displayed at {@code position}. Here we
+     * inflate a layout from the apps resources and then change the text view to signify the position.
+     */
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        final View view;
+        LayoutInflater inflater = LayoutInflater.from(container.getContext());
+        if (position == 0) {
+            view = inflater.inflate(R.layout.login_view, container, false);
+            container.addView(view);
+
+            final SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+            final TextView txt = (TextView) view.findViewById(R.id.textView2);
+            Button btn = (Button) view.findViewById(R.id.button_submit_log);
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Utility.parseWrite(seekBar.getProgress() + 1);
+                    Utility.updateParse();
+                    Utility.updateViewPager(view);
+                }
+            });
+
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    txt.setText(Utility.convertSleepinessValueToDescription(seekBar.getProgress() + 1));
+                }
+            });
+
+        } else {
+            view = inflater.inflate(R.layout.scroll_view, container, false);
+            container.addView(view);
+
+            // Let view know which page it is
+            CalendarView cal = (CalendarView) view.findViewById(R.id.CalendarView);
+            cal.setPageIndex(position);
+        }
+        return view;
+    }
+
+    /**
+     * Destroy the item from the {@link ViewPager}. In our case this is simply removing the
+     * {@link View}.
+     */
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+    }
+
 }

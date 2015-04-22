@@ -5,11 +5,57 @@
       android:orientation="vertical"
       android:background="#000000">
 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_weight="1"
+            android:text="Not Sleepy"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_weight="1"
+            android:text="Sleepy"
+            />
+    </LinearLayout>
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:max="7"
-        android:thumb="@drawable/ic_in_call_touch_handle_normal"
-        android:background="@null"/>
+        android:max="6"
+        android:progress="3"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="10dp"
+        android:splitTrack="false"
+        android:maxHeight="10dip"
+        android:minHeight="10dip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Please slide to log"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/button_submit_log"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

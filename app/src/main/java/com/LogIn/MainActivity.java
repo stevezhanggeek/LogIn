@@ -15,7 +15,7 @@
 */
 
 package com.LogIn;
-
+import com.LogIn.SamplePagerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -24,8 +24,12 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseUser;
 
 public class MainActivity extends FragmentActivity {
 
@@ -36,11 +40,19 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         startActivity(new Intent(this, StartLockScreen.class));
 
-        Button btn = (Button) findViewById(R.id.add_log_button);
+        Parse.enableLocalDatastore(getApplicationContext());
+        Parse.initialize(this, "9DNSMkDuMcOv0Mi918JSe1CfMlkBPQ9UJVp8ksQB", "Qo53m1lBF7kXzbdP0OJ8bbL1OH6AuJnZbFRyOI4K");
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        ParseACL.setDefaultACL(defaultACL, true);
+        Utility.initParameters();
+
+        Button btn = (Button) findViewById(R.id.button_add_log);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-                viewPager.setCurrentItem(0, true);
+                ViewPager vp = (ViewPager) findViewById(R.id.viewpager);
+                vp.setCurrentItem(0, true);
+                vp.setAdapter(new SamplePagerAdapter());
             }
         });
 
@@ -50,7 +62,5 @@ public class MainActivity extends FragmentActivity {
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
-        Parse.enableLocalDatastore(getApplicationContext());
-        Parse.initialize(this, "9DNSMkDuMcOv0Mi918JSe1CfMlkBPQ9UJVp8ksQB", "Qo53m1lBF7kXzbdP0OJ8bbL1OH6AuJnZbFRyOI4K");
     }
 }
