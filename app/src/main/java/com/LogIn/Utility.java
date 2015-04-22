@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -77,6 +78,7 @@ public class Utility extends Activity {
         parseObj.put("value", value);
         parseObj.put("time", new Date());
         parseObj.saveInBackground();
+        parseObj.pinInBackground();
     }
 
     public static List<ParseObject> updateParse() {
@@ -94,7 +96,7 @@ public class Utility extends Activity {
         return m_valueList;
     }
 
-    public static void updateViewPager(View v) {
+    public static void updateViewPager(ViewGroup v) {
         ViewPager vp = (ViewPager) v.findViewById(R.id.viewpager);
         if (vp!=null) vp.setAdapter(new SamplePagerAdapter());
     }

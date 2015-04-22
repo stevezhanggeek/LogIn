@@ -87,7 +87,6 @@ public class CalendarView extends View {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-//                System.out.println(year + " " + month + " " + day);
                 if (year == Utility.year_start && month == Utility.month_start && day == Utility.day_start) {
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
                     int minute = cal.get(Calendar.MINUTE);

@@ -18,6 +18,7 @@ package com.LogIn;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -130,8 +131,8 @@ class SamplePagerAdapter extends PagerAdapter {
      * inflate a layout from the apps resources and then change the text view to signify the position.
      */
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        final View view;
+    public Object instantiateItem(final ViewGroup container, int position) {
+        View view;
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         if (position == 0) {
             view = inflater.inflate(R.layout.login_view, container, false);
@@ -144,7 +145,13 @@ class SamplePagerAdapter extends PagerAdapter {
                 public void onClick(View v) {
                     Utility.parseWrite(seekBar.getProgress() + 1);
                     Utility.updateParse();
-                    Utility.updateViewPager(view);
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Utility.updateViewPager(container);
+                        }
+                    }, 100);
                 }
             });
 
