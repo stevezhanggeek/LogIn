@@ -31,6 +31,9 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class SlidingTabsBasicFragment extends Fragment {
 
     static final String LOG_TAG = "SlidingTabsBasicFragment";
@@ -122,7 +125,15 @@ class SamplePagerAdapter extends PagerAdapter {
         if (position == 0) {
             return "Add Log";
         }
-        return "Day " + position;
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Utility.year_start);
+        cal.set(Calendar.MONTH, Utility.month_start);
+        cal.set(Calendar.DAY_OF_MONTH, Utility.day_start);
+
+        cal.add(Calendar.DATE, position - 2 + (position+1)/2);
+
+        return cal.get(Calendar.MONTH)+1 + "/" + cal.get(Calendar.DAY_OF_MONTH);
     }
     // END_INCLUDE (pageradapter_getpagetitle)
 
