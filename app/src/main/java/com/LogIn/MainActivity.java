@@ -24,6 +24,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -32,7 +33,6 @@ import com.parse.ParseACL;
 import com.parse.ParseUser;
 
 public class MainActivity extends FragmentActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

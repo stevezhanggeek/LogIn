@@ -27,6 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -125,7 +127,7 @@ class SamplePagerAdapter extends PagerAdapter {
         if (position == 0) {
             return "Add Log";
         }
-        
+
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, Utility.year_start);
         cal.set(Calendar.MONTH, Utility.month_start);
@@ -151,9 +153,16 @@ class SamplePagerAdapter extends PagerAdapter {
 
             final SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
             final TextView txt = (TextView) view.findViewById(R.id.textView2);
+
             Button btn = (Button) view.findViewById(R.id.button_submit_log);
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    RadioGroup radioGroup = (RadioGroup) container.findViewById(R.id.radio_group);
+                    if (radioGroup.getCheckedRadioButtonId() == R.id.accomplishment) {
+                        System.out.println("accomplishment");
+                    } else if (radioGroup.getCheckedRadioButtonId() == R.id.pleasure) {
+                        System.out.println("pleasure");
+                    }
                     Utility.parseWrite(seekBar.getProgress() + 1);
                     Utility.getDataFromParse();
                     final Handler handler = new Handler();

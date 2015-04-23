@@ -20,6 +20,7 @@ import com.parse.ParseQueryAdapter;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class Utility extends Activity {
     public static int num_days_experiment_length = 12;
     public static int year_start = 2015;
     public static int month_start = 3; // start from 0
-    public static int day_start = 21;
+    public static int day_start = 10;
     public static int hour_start = 10;
     public static int num_hour_experiment_length = 10;
     public static String name_datastore = "Logs_";
@@ -108,7 +109,16 @@ public class Utility extends Activity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    vp.setCurrentItem(2);
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Calendar.YEAR, Utility.year_start);
+                    cal.set(Calendar.MONTH, Utility.month_start);
+                    cal.set(Calendar.DAY_OF_MONTH, Utility.day_start);
+
+                    long diff = new Date().getTime() - cal.getTime().getTime();
+                    long elapsedDays = diff / (1000*60*60*24);
+                    System.out.println(Math.ceil((double)elapsedDays*2/3));
+
+                    vp.setCurrentItem((int)Math.ceil((double)elapsedDays*2/3)+1);
                 }
             }, 100);
         }
