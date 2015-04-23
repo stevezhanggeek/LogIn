@@ -27,12 +27,12 @@ import java.util.UUID;
 
 public class Utility extends Activity {
     private static String deviceID = "";
-    public static int num_days_experiment_length = 12;
+    public static int num_days_experiment_length = 17;
     public static int year_start = 2015;
     public static int month_start = 3; // start from 0
-    public static int day_start = 10;
+    public static int day_start = 21;
     public static int hour_start = 10;
-    public static int num_hour_experiment_length = 10;
+    public static int num_hour_experiment_length = 12;
     public static String name_datastore = "Logs_";
 
     public static List<ParseObject> m_valueList;
@@ -116,9 +116,7 @@ public class Utility extends Activity {
 
                     long diff = new Date().getTime() - cal.getTime().getTime();
                     long elapsedDays = diff / (1000*60*60*24);
-                    System.out.println(Math.ceil((double)elapsedDays*2/3));
-
-                    vp.setCurrentItem((int)Math.ceil((double)elapsedDays*2/3)+1);
+                    vp.setCurrentItem((int)elapsedDays+1);
                 }
             }, 100);
         }

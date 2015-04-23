@@ -133,7 +133,7 @@ class SamplePagerAdapter extends PagerAdapter {
         cal.set(Calendar.MONTH, Utility.month_start);
         cal.set(Calendar.DAY_OF_MONTH, Utility.day_start);
 
-        cal.add(Calendar.DATE, position - 2 + (position+1)/2);
+        cal.add(Calendar.DATE, position - 1);
 
         return cal.get(Calendar.MONTH)+1 + "/" + cal.get(Calendar.DAY_OF_MONTH);
     }
