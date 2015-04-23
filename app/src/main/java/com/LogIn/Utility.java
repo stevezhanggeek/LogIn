@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +32,9 @@ public class Utility extends Activity {
     public static int day_start = 21;
     public static int hour_start = 10;
     public static int num_hour_experiment_length = 10;
+    public static String name_datastore = "Logs_";
 
     public static List<ParseObject> m_valueList;
-    public static ViewPager m_vp;
 
     public static String getUniquePsuedoID() {
         String m_szDevIDShort = "35" + (Build.BOARD.length() % 10) + (Build.BRAND.length() % 10) + (Build.CPU_ABI.length() % 10) + (Build.DEVICE.length() % 10) + (Build.MANUFACTURER.length() % 10) + (Build.MODEL.length() % 10) + (Build.PRODUCT.length() % 10);
@@ -47,8 +49,8 @@ public class Utility extends Activity {
     }
 
     public static void initParameters() {
-        deviceID = getUniquePsuedoID();
-//        updateParse();
+        deviceID = getUniquePsuedoID().replace("-", "");
+        name_datastore = name_datastore + deviceID;
         /*
         ParseQuery<ParseObject> query;
         query = ParseQuery.getQuery("Parameters");
@@ -76,8 +78,7 @@ public class Utility extends Activity {
     }
 
     public static void parseWrite(final int value) {
-        ParseObject parseObj = new ParseObject("Logs");
-        parseObj.put("deviceID", deviceID);
+        ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("value", value);
         parseObj.put("time", new Date());
         parseObj.saveInBackground();
@@ -85,7 +86,7 @@ public class Utility extends Activity {
     }
 
     public static List<ParseObject> getDataFromParse() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Logs");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(name_datastore);
         query.fromLocalDatastore();
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> valueList, ParseException e) {
@@ -100,8 +101,17 @@ public class Utility extends Activity {
     }
 
     public static void updateViewPager(ViewGroup v) {
-        ViewPager vp = (ViewPager) v.findViewById(R.id.viewpager);
-        if (vp!=null) vp.setAdapter(new SamplePagerAdapter());
+        final ViewPager vp = (ViewPager) v.findViewById(R.id.viewpager);
+        if (vp!=null) {
+            vp.setAdapter(new SamplePagerAdapter());
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    vp.setCurrentItem(2);
+                }
+            }, 100);
+        }
     }
 
     public static String convertSleepinessValueToDescription(int value) {

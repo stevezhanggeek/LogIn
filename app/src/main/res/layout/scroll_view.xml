@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/darker_gray">
+    </View>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/linearView"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.LogIn.CalendarView
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/linearView"
             android:layout_width="match_parent"
-            android:layout_height="3100px"
-            android:id="@+id/CalendarView" />
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
-</ScrollView>
+            <com.LogIn.CalendarView
+                android:layout_width="match_parent"
+                android:layout_height="3100px"
+                android:id="@+id/CalendarView" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

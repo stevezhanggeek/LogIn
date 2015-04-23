@@ -40,12 +40,9 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         startActivity(new Intent(this, StartLockScreen.class));
 
+        Utility.initParameters();
         Parse.enableLocalDatastore(getApplicationContext());
         Parse.initialize(this, "PYRCXauUEwux9LbJtA4mp1KptYj3XRd1W1c7ukZI", "55XOAxJQEnsr7X6uIPzRzCaDDVLQDgLOFVa9DRba");
-        ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        ParseACL.setDefaultACL(defaultACL, true);
-        Utility.initParameters();
 
         Button btn = (Button) findViewById(R.id.button_add_log);
         btn.setOnClickListener(new View.OnClickListener() {

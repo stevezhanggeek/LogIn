@@ -151,7 +151,7 @@ class SamplePagerAdapter extends PagerAdapter {
                         public void run() {
                             Utility.updateViewPager(container);
                         }
-                    }, 100);
+                    }, 1000);
                 }
             });
 
