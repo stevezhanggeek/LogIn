@@ -19,19 +19,10 @@
         </activity>
 
         <activity
+            android:name=".Lockscreen"
+            android:launchMode="singleInstance"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:screenOrientation="portrait"
-            android:name=".Lockscreen">
-            <intent-filter >
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-
-        <activity
-            android:name=".StartLockscreen"
-            android:theme="@style/Theme.Transparent" >
+            android:screenOrientation="portrait">
         </activity>
 
         <service android:name=".LockscreenService" >
@@ -42,7 +33,6 @@
             android:name="receiver.lockScreenReceiver" >
             <intent-filter >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-
             </intent-filter>
         </receiver>
     </application>

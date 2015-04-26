@@ -16,9 +16,9 @@ import net.frakbot.glowpadbackport.GlowPadView;
 public class Lockscreen extends Activity {
     private boolean grid_triggered = false;
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        System.out.println("Lock");
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         View decorView = getWindow().getDecorView();
@@ -31,8 +31,6 @@ public class Lockscreen extends Activity {
         if(getIntent()!=null&&getIntent().hasExtra("kill")&&getIntent().getExtras().getInt("kill")==1){
             finish();
         }
-        // initialize receiver
-//        startService(new Intent(this, StartLockscreen.class));
 
         // Use user desktop wallpaper in lockscreen
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
