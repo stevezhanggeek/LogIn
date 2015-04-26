@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 
-public class MyService extends Service{
+public class LockscreenService extends Service{
     BroadcastReceiver mReceiver;
     @Override
     public IBinder onBind(Intent intent) {

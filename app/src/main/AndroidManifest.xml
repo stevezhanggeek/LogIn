@@ -21,7 +21,7 @@
         <activity
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait"
-            android:name=".SampleActivity">
+            android:name=".Lockscreen">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -30,11 +30,11 @@
 
 
         <activity
-            android:name=".StartLockScreen"
+            android:name=".StartLockscreen"
             android:theme="@style/Theme.Transparent" >
         </activity>
 
-        <service android:name=".MyService" >
+        <service android:name=".LockscreenService" >
         </service>
 
         <receiver

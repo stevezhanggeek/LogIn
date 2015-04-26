@@ -1,25 +1,17 @@
 package com.LogIn;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +42,7 @@ public class Utility extends Activity {
     }
 
     public static void initParameters() {
+        // Parse doesn't allow "-" in object name
         deviceID = getUniquePsuedoID().replace("-", "");
         name_datastore = name_datastore + deviceID;
         /*
@@ -104,7 +97,7 @@ public class Utility extends Activity {
     public static void updateViewPager(ViewGroup v) {
         final ViewPager vp = (ViewPager) v.findViewById(R.id.viewpager);
         if (vp!=null) {
-            vp.setAdapter(new SamplePagerAdapter());
+            vp.setAdapter(new AdvancedPagerAdapter());
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -156,25 +149,25 @@ public class Utility extends Activity {
         int sleepiness_color;
         switch(value) {
             case 1:
-                sleepiness_color = Color.rgb(0,255,0);
+                sleepiness_color = Color.rgb(15,240,0);
                 break;
             case 2:
-                sleepiness_color = Color.rgb(35,220,0);
+                sleepiness_color = Color.rgb(55,200,0);
                 break;
             case 3:
-                sleepiness_color = Color.rgb(70,185,0);
+                sleepiness_color = Color.rgb(95,160,0);
                 break;
             case 4:
-                sleepiness_color = Color.rgb(105,150,0);
+                sleepiness_color = Color.rgb(135,120,0);
                 break;
             case 5:
-                sleepiness_color = Color.rgb(140,115,0);
-                break;
-            case 6:
                 sleepiness_color = Color.rgb(175,80,0);
                 break;
+            case 6:
+                sleepiness_color = Color.rgb(215,40,0);
+                break;
             case 7:
-                sleepiness_color = Color.rgb(210,45,0);
+                sleepiness_color = Color.rgb(255,0,0);
                 break;
             default:
                 sleepiness_color = Color.BLACK;

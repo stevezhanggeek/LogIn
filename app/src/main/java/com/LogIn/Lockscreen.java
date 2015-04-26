@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.frakbot.glowpadbackport.GlowPadView;
 
-public class SampleActivity extends Activity {
+public class Lockscreen extends Activity {
     private boolean grid_triggered = false;
 
     /** Called when the activity is first created. */
@@ -26,13 +26,13 @@ public class SampleActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        setContentView(R.layout.main);
+        setContentView(R.layout.lockscreen);
 
         if(getIntent()!=null&&getIntent().hasExtra("kill")&&getIntent().getExtras().getInt("kill")==1){
             finish();
         }
         // initialize receiver
-        startService(new Intent(this, MyService.class));
+//        startService(new Intent(this, StartLockscreen.class));
 
         // Use user desktop wallpaper in lockscreen
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
@@ -52,7 +52,7 @@ public class SampleActivity extends Activity {
             public void onReleased(View v, int handle) {
                 if (grid_triggered) {
                     moodGrid.setVisibility(View.INVISIBLE);
-                    Toast.makeText(SampleActivity.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Lockscreen.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -61,7 +61,7 @@ public class SampleActivity extends Activity {
             public void onTrigger(View v, int target) {
                 Utility.parseWrite(target - 2);
                 String sleepiness_description = Utility.convertSleepinessValueToDescription(target - 2);
-                Toast.makeText(SampleActivity.this, sleepiness_description, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Lockscreen.this, sleepiness_description, Toast.LENGTH_SHORT).show();
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();
@@ -73,7 +73,6 @@ public class SampleActivity extends Activity {
 
             @Override
             public void onFinishFinalAnimation() {
-                // Do nothing
             }
 
             @Override

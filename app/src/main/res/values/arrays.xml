@@ -4,13 +4,13 @@
         <item>@drawable/ic_lockscreen_answer</item>
         <item>@drawable/ic_lockscreen_greendot</item>
         <item>@drawable/ic_lockscreen_greendot</item>
-        <item>@drawable/ic_lockscreen_sleepiness_1</item>
-        <item>@drawable/ic_lockscreen_sleepiness_2</item>
-        <item>@drawable/ic_lockscreen_sleepiness_3</item>
-        <item>@drawable/ic_lockscreen_sleepiness_4</item>
-        <item>@drawable/ic_lockscreen_sleepiness_5</item>
-        <item>@drawable/ic_lockscreen_sleepiness_6</item>
-        <item>@drawable/ic_lockscreen_sleepiness_7</item>
+        <item>@drawable/level_1</item>
+        <item>@drawable/level_2</item>
+        <item>@drawable/level_3</item>
+        <item>@drawable/level_4</item>
+        <item>@drawable/level_5</item>
+        <item>@drawable/level_6</item>
+        <item>@drawable/level_7</item>
         <item>@drawable/ic_lockscreen_greendot</item>
         <item>@drawable/ic_lockscreen_greendot</item>
     </array>

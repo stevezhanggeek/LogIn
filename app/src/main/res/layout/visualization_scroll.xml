@@ -18,7 +18,7 @@
 
             <com.LogIn.CalendarView
                 android:layout_width="match_parent"
-                android:layout_height="3100px"
+                android:layout_height="4000px"
                 android:id="@+id/CalendarView" />
 
         </LinearLayout>
