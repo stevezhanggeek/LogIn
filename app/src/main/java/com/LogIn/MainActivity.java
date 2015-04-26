@@ -15,6 +15,8 @@
 */
 
 package com.LogIn;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +29,8 @@ import android.widget.Button;
 
 import com.parse.Parse;
 
+import java.util.Calendar;
+
 public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,19 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         startService(new Intent(this, LockscreenService.class));
+/*
+        Intent myIntent = new Intent(this, RateAlert.class);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 57);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent);
+*/
+        AlarmReceiver alarm = new AlarmReceiver();
+        alarm.setAlarm(this);
 
         Utility.initParameters();
         Parse.enableLocalDatastore(getApplicationContext());

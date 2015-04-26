@@ -76,8 +76,8 @@ public class CalendarView extends View {
         if (m_valueList != null) {
             for (ParseObject object : m_valueList) {
                 int value = object.getInt("value");
-                int startX = text_width + 100;
-//                int startX = text_width + (value - 1) * (width - text_width) / 7;
+//                int startX = text_width + 100;
+                int startX = text_width + (value - 1) * (width - text_width) / 7;
 
                 Date time = object.getDate("time");
                 Calendar cal = Calendar.getInstance();
@@ -92,7 +92,7 @@ public class CalendarView extends View {
 
                     int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
                     paint.setColor(Utility.convertSleepinessValueToColor(value));
-                    RectF rf = new RectF(startX, startY, startX + 1000, startY + 20);
+                    RectF rf = new RectF(startX, startY, startX + (width - text_width) / 7 - 10, startY + 20);
                     canvas.drawRoundRect(rf, 15, 15, paint);
                 }
             }

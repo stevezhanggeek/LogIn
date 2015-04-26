@@ -24,7 +24,7 @@ public class Utility extends Activity {
     public static int month_start = 3; // start from 0
     public static int day_start = 21;
     public static int hour_start = 10;
-    public static int num_hour_experiment_length = 12;
+    public static int num_hour_experiment_length = 14;
     public static String name_datastore = "Logs_";
 
     public static List<ParseObject> m_valueList;
