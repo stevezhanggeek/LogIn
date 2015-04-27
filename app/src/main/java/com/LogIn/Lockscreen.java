@@ -15,6 +15,7 @@ import net.frakbot.glowpadbackport.GlowPadView;
 
 public class Lockscreen extends Activity {
     private boolean grid_triggered = false;
+    private String type_log = "Mood";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,61 +38,129 @@ public class Lockscreen extends Activity {
         RelativeLayout ll = (RelativeLayout) findViewById(R.id.main);
         ll.setBackground(wallpaperManager.getFastDrawable());
 
-        grid_triggered = false;
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
         final ImageView moodGrid = (ImageView) findViewById(R.id.mood_grid);
         final ImageView whiteBackground = (ImageView) findViewById(R.id.white_background);
 
-        glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
-            @Override
-            public void onGrabbed(View v, int handle) {
-            }
+        if (type_log == "Sleepiness") {
+            glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
+                @Override
+                public void onGrabbed(View v, int handle) {
+                }
 
-            @Override
-            public void onReleased(View v, int handle) {
-                if (grid_triggered) {
-                    moodGrid.setVisibility(View.INVISIBLE);
-                    whiteBackground.setVisibility(View.INVISIBLE);
-                    Toast.makeText(Lockscreen.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onReleased(View v, int handle) {
+                }
+
+                @Override
+                public void onTrigger(View v, int target) {
+                    Utility.parseWrite(target - 2);
+                    glowPad.reset(true);
+                    v.setVisibility(View.GONE);
                     finish();
                 }
-            }
 
-            @Override
-            public void onTrigger(View v, int target) {
-                Utility.parseWrite(target - 2);
-                String sleepiness_description = Utility.convertSleepinessValueToDescription(target - 2);
-                Toast.makeText(Lockscreen.this, sleepiness_description, Toast.LENGTH_SHORT).show();
-                glowPad.reset(true);
-                v.setVisibility(View.GONE);
-                finish();
-            }
-
-            @Override
-            public void onGrabbedStateChange(View v, int handle) {
-            }
-
-            @Override
-            public void onFinishFinalAnimation() {
-            }
-
-            @Override
-            public void onMovedOnTarget(int target) {
-                System.out.println(target);
-                final TextView txt = (TextView) findViewById(R.id.textView);
-                String sleepiness_description = Utility.convertSleepinessValueToDescription(target - 2);
-
-                if (target == 3) {
-                    glowPad.setVisibility(View.GONE);
-                    glowPad.setVibrateEnabled(false);
-                    moodGrid.setVisibility(View.VISIBLE);
-                    whiteBackground.setVisibility(View.VISIBLE);
-                    grid_triggered = true;
+                @Override
+                public void onGrabbedStateChange(View v, int handle) {
                 }
-                if (glowPad.mhandle == 0)
-                    sleepiness_description = "Pleasure " + String.valueOf(target);
-                txt.setText(sleepiness_description);
-            }
-        });
+
+                @Override
+                public void onFinishFinalAnimation() {
+                }
+
+                @Override
+                public void onMovedOnTarget(int target) {
+                    final TextView txt = (TextView) findViewById(R.id.textView);
+                    String sleepiness_description = Utility.convertSleepinessValueToDescription(target - 2);
+                    txt.setText(sleepiness_description);
+                }
+            });
+        }
+        if (type_log == "Depression") {
+            glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
+                @Override
+                public void onGrabbed(View v, int handle) {
+                }
+
+                @Override
+                public void onReleased(View v, int handle) {
+                }
+
+                @Override
+                public void onTrigger(View v, int target) {
+                    Utility.parseWrite(target - 2);
+                    glowPad.reset(true);
+                    v.setVisibility(View.GONE);
+                    finish();
+                }
+
+                @Override
+                public void onGrabbedStateChange(View v, int handle) {
+                }
+
+                @Override
+                public void onFinishFinalAnimation() {
+                }
+
+                @Override
+                public void onMovedOnTarget(int target) {
+                    final TextView txt = (TextView) findViewById(R.id.textView);
+                    String depression_description;
+
+                    if (glowPad.mhandle == 0) {
+                        depression_description = "Pleasure " + String.valueOf(target - 2);
+                    } else {
+                        depression_description = "Accomplishment " + String.valueOf(target - 2);
+                    }
+                    txt.setText(depression_description);
+                }
+            });
+        }
+        if (type_log == "Mood") {
+            grid_triggered = false;
+
+            glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
+                @Override
+                public void onGrabbed(View v, int handle) {
+                }
+
+                @Override
+                public void onReleased(View v, int handle) {
+                    if (grid_triggered) {
+                        moodGrid.setVisibility(View.INVISIBLE);
+                        whiteBackground.setVisibility(View.INVISIBLE);
+                        Toast.makeText(Lockscreen.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onTrigger(View v, int target) {
+                    Utility.parseWrite(target - 2);
+                    glowPad.reset(true);
+                    v.setVisibility(View.GONE);
+                    finish();
+                }
+
+                @Override
+                public void onGrabbedStateChange(View v, int handle) {
+                }
+
+                @Override
+                public void onFinishFinalAnimation() {
+                }
+
+                @Override
+                public void onMovedOnTarget(int target) {
+                    if (target == 3) {
+                        glowPad.setVisibility(View.GONE);
+                        glowPad.setVibrateEnabled(false);
+                        moodGrid.setVisibility(View.VISIBLE);
+                        whiteBackground.setVisibility(View.VISIBLE);
+                        grid_triggered = true;
+                    }
+                }
+            });
+        }
     }
 }
