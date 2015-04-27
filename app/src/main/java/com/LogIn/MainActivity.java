@@ -50,12 +50,26 @@ public class MainActivity extends FragmentActivity {
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent);
 */
-        AlarmReceiver alarm = new AlarmReceiver();
-        alarm.setAlarm(this);
+        AlarmManager alarmMgr;
+        PendingIntent alarmIntent;
 
-        Utility.initParameters();
-        Parse.enableLocalDatastore(getApplicationContext());
-        Parse.initialize(this, "PYRCXauUEwux9LbJtA4mp1KptYj3XRd1W1c7ukZI", "55XOAxJQEnsr7X6uIPzRzCaDDVLQDgLOFVa9DRba");
+        alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, RateAlert.class);
+        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        // Set the alarm's trigger time to 8:30 a.m.
+        calendar.set(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.MINUTE, 32);
+
+        // Set the alarm to fire at approximately 8:30 a.m., according to the device's
+        // clock, and to repeat once a day.
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
+//        AlarmReceiver alarm = new AlarmReceiver();
+//        alarm.setAlarm(this);
 
         Button btn = (Button) findViewById(R.id.button_add_log);
         btn.setOnClickListener(new View.OnClickListener() {
