@@ -14,4 +14,32 @@
         <item>@drawable/ic_lockscreen_greendot</item>
         <item>@drawable/ic_lockscreen_greendot</item>
     </array>
+    <array name="targets_sleepiness">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/ic_lockscreen_greendot</item>
+        <item>@drawable/ic_lockscreen_greendot</item>
+        <item>@drawable/level_1</item>
+        <item>@drawable/level_2</item>
+        <item>@drawable/level_3</item>
+        <item>@drawable/level_4</item>
+        <item>@drawable/level_5</item>
+        <item>@drawable/level_6</item>
+        <item>@drawable/level_7</item>
+        <item>@drawable/ic_lockscreen_greendot</item>
+        <item>@drawable/ic_lockscreen_greendot</item>
+    </array>
+    <array name="targets_depression">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/ic_lockscreen_greendot</item>
+        <item>@drawable/level_1</item>
+        <item>@drawable/level_2</item>
+        <item>@drawable/level_3</item>
+        <item>@drawable/level_4</item>
+        <item>@drawable/level_5</item>
+        <item>@drawable/ic_lockscreen_greendot</item>
+    </array>
+    <array name="targets_mood">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/level_1</item>
+    </array>
 </resources>

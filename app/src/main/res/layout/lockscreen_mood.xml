@@ -4,7 +4,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-    android:id="@+id/main">
+    android:id="@+id/lockscreen_mood_main">
 
     <TextClock
         android:layout_width="match_parent"
@@ -38,8 +38,8 @@
         android:layout_height="fill_parent"
         android:visibility="visible"
 
-        app:targetDrawables="@array/incoming_call_widget_2way_targets"
-        app:handleDrawable="@drawable/ic_in_call_touch_handle"
+        app:targetDrawables="@array/targets_mood"
+        app:handleDrawable="@drawable/handle_mood"
         app:innerRadius="@dimen/glowpadview_inner_radius"
         app:outerRadius="@dimen/glowpadview_target_placement_radius"
         app:outerRingDrawable="@drawable/ic_lockscreen_outerring"

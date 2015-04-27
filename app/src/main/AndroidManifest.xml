@@ -28,7 +28,21 @@
         </activity>
 
         <activity
-            android:name=".Lockscreen"
+            android:name=".LockscreenSleepiness"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".LockscreenDepression"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".LockscreenMood"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait">
