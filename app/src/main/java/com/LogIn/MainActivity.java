@@ -39,37 +39,9 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         startService(new Intent(this, LockscreenService.class));
-/*
-        Intent myIntent = new Intent(this, RateAlert.class);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 57);
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent);
-*/
-        AlarmManager alarmMgr;
-        PendingIntent alarmIntent;
-
-        alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, RateAlert.class);
-        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        // Set the alarm's trigger time to 8:30 a.m.
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
-        calendar.set(Calendar.MINUTE, 32);
-
-        // Set the alarm to fire at approximately 8:30 a.m., according to the device's
-        // clock, and to repeat once a day.
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-
-//        AlarmReceiver alarm = new AlarmReceiver();
-//        alarm.setAlarm(this);
+        AlarmReceiver alarm = new AlarmReceiver();
+        alarm.setAlarm(this);
 
         Button btn = (Button) findViewById(R.id.button_add_log);
         btn.setOnClickListener(new View.OnClickListener() {
