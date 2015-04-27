@@ -6,6 +6,12 @@
                 android:layout_height="fill_parent"
     android:id="@+id/lockscreen_sleepiness_main">
 
+    <ImageView
+        android:id="@+id/dark_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#44000000"/>
+
     <TextClock
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

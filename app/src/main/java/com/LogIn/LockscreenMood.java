@@ -5,6 +5,7 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -27,9 +28,22 @@ public class LockscreenMood extends Lockscreen {
 
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
         final ImageView moodGrid = (ImageView) findViewById(R.id.mood_grid);
-        final ImageView whiteBackground = (ImageView) findViewById(R.id.white_background);
+        final ImageView whiteBackground = (ImageView) findViewById(R.id.dark_background);
 
         grid_triggered = false;
+
+        glowPad.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent e)
+            {
+                if (grid_triggered) {
+                    final TextView txt = (TextView) findViewById(R.id.textView);
+                    String sleepiness_description = String.valueOf(e.getX()) + ", " + String.valueOf(e.getY());
+                    txt.setText(sleepiness_description);
+                }
+                return false;
+            }
+        });
 
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override
