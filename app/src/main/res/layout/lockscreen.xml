@@ -6,7 +6,6 @@
                 android:layout_height="fill_parent"
     android:id="@+id/main">
 
-
     <TextClock
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +58,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/mood_grid"
-        android:layout_below="@+id/textView"
-        android:background="#66FFFFFF" />
+        android:layout_below="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/white_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:background="#22FFFFFF" />
 
 </RelativeLayout>

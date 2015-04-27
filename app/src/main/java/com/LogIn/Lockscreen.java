@@ -34,12 +34,13 @@ public class Lockscreen extends Activity {
 
         // Use user desktop wallpaper in lockscreen
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        final Drawable wallpaperDrawable = wallpaperManager.getFastDrawable();
+        RelativeLayout ll = (RelativeLayout) findViewById(R.id.main);
+        ll.setBackground(wallpaperManager.getFastDrawable());
+
+        grid_triggered = false;
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
         final ImageView moodGrid = (ImageView) findViewById(R.id.mood_grid);
-        RelativeLayout ll = (RelativeLayout) findViewById(R.id.main);
-        ll.setBackground(wallpaperDrawable);
-        grid_triggered = false;
+        final ImageView whiteBackground = (ImageView) findViewById(R.id.white_background);
 
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override
@@ -50,6 +51,7 @@ public class Lockscreen extends Activity {
             public void onReleased(View v, int handle) {
                 if (grid_triggered) {
                     moodGrid.setVisibility(View.INVISIBLE);
+                    whiteBackground.setVisibility(View.INVISIBLE);
                     Toast.makeText(Lockscreen.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -83,6 +85,7 @@ public class Lockscreen extends Activity {
                     glowPad.setVisibility(View.GONE);
                     glowPad.setVibrateEnabled(false);
                     moodGrid.setVisibility(View.VISIBLE);
+                    whiteBackground.setVisibility(View.VISIBLE);
                     grid_triggered = true;
                 }
                 if (glowPad.mhandle == 0)
