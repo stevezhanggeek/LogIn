@@ -24,7 +24,7 @@
         android:textColor="#FFFFFF" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView"
@@ -35,8 +35,10 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:textAlignment="gravity"
+        android:gravity="right" />
 
     <net.frakbot.glowpadbackport.GlowPadView
         android:id="@+id/incomingCallWidget"

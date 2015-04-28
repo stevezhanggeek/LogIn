@@ -146,32 +146,40 @@ public class Utility extends Activity {
     }
 
     public static int convertSleepinessValueToColor(int value) {
-        int sleepiness_color;
         switch(value) {
             case 1:
-                sleepiness_color = Color.rgb(15,240,0);
-                break;
+                return Color.rgb(15,240,0);
             case 2:
-                sleepiness_color = Color.rgb(55,200,0);
-                break;
+                return Color.rgb(55,200,0);
             case 3:
-                sleepiness_color = Color.rgb(95,160,0);
-                break;
+                return Color.rgb(95,160,0);
             case 4:
-                sleepiness_color = Color.rgb(135,120,0);
-                break;
+                return Color.rgb(135,120,0);
             case 5:
-                sleepiness_color = Color.rgb(175,80,0);
-                break;
+                return Color.rgb(175,80,0);
             case 6:
-                sleepiness_color = Color.rgb(215,40,0);
-                break;
+                return Color.rgb(215,40,0);
             case 7:
-                sleepiness_color = Color.rgb(255,0,0);
-                break;
+                return Color.rgb(255,0,0);
             default:
-                sleepiness_color = Color.BLACK;
+                return Color.BLACK;
         }
-        return sleepiness_color;
+    }
+
+    public static String convertScaleValueToAdj(int value) {
+        switch(value) {
+            case 1:
+                return "Not at all";
+            case 2:
+                return "Slightly";
+            case 3:
+                return "Somewhat";
+            case 4:
+                return "Very";
+            case 5:
+                return "Extremely";
+            default:
+                return "";
+        }
     }
 }

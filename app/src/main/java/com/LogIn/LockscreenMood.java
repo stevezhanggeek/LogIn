@@ -38,7 +38,25 @@ public class LockscreenMood extends Lockscreen {
             {
                 if (grid_triggered) {
                     final TextView txt = (TextView) findViewById(R.id.textView);
-                    String sleepiness_description = String.valueOf(e.getX()) + ", " + String.valueOf(e.getY());
+
+                    double grid_size = moodGrid.getWidth()/12;
+                    String negative_positive = "Negative";
+                    int level_negative_positive = (int)((double)(e.getX() - moodGrid.getWidth() / 2) / grid_size);
+                    if (e.getX() > moodGrid.getWidth() / 2) {
+                        negative_positive = "Positive";
+                    }
+
+                    String low_high = "High";
+                    int level_low_high = (int)((double)(e.getY() - moodGrid.getHeight() / 2) / grid_size);
+                    if (e.getY() > moodGrid.getHeight() / 2) {
+                        low_high = "Low";
+                    }
+
+                    String sleepiness_description =
+                            Utility.convertScaleValueToAdj(Math.abs(level_negative_positive) + 1) + " "
+                                    + negative_positive + "\n" +
+                                    Utility.convertScaleValueToAdj(Math.abs(level_low_high) + 1) + " "
+                                    + low_high;
                     txt.setText(sleepiness_description);
                 }
                 return false;
@@ -55,7 +73,6 @@ public class LockscreenMood extends Lockscreen {
                 if (grid_triggered) {
                     moodGrid.setVisibility(View.INVISIBLE);
                     whiteBackground.setVisibility(View.INVISIBLE);
-                    Toast.makeText(LockscreenMood.this, String.valueOf(glowPad.mgrid_X) + ", " + String.valueOf(glowPad.mgrid_Y), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
