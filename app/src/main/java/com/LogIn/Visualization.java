@@ -15,39 +15,24 @@
 */
 
 package com.LogIn;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 
 
-public class MainActivity extends FragmentActivity {
+public class Visualization extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.main);
-        startService(new Intent(this, LockscreenService.class));
-
-        AlarmReceiver alarm = new AlarmReceiver();
-        alarm.setAlarm(this);
-
-        Button btn = (Button) findViewById(R.id.button_add_log);
-        btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ViewPager vp = (ViewPager) findViewById(R.id.viewpager);
-                vp.setCurrentItem(0, true);
-            }
-        });
+        setContentView(R.layout.visualization_main);
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             SlidingTabsBasicFragment fragment = new SlidingTabsBasicFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
         }
     }

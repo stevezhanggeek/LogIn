@@ -82,7 +82,7 @@ public class CalendarViewSleepiness extends View {
                 Date time = object.getDate("time");
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(time);
-                cal.add(Calendar.DATE, (1-index_day));
+                cal.add(Calendar.DATE, -index_day);
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);

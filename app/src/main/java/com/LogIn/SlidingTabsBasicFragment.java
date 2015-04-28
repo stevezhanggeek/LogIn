@@ -42,7 +42,13 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment, container, false);
+        if (Utility.LogInType.equals("Sleepiness")) {
+            return inflater.inflate(R.layout.fragment_sleepiness, container, false);
+        } else if (Utility.LogInType.equals("Depression")) {
+            return inflater.inflate(R.layout.fragment_depression, container, false);
+        } else {
+            return inflater.inflate(R.layout.fragment_mood, container, false);
+        }
     }
 
     /**
@@ -61,6 +67,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         mViewPager.setAdapter(new AdvancedPagerAdapter());
         // Max cache screens
         mViewPager.setOffscreenPageLimit(mViewPager.getAdapter().getCount());
+        mViewPager.setCurrentItem(4, true);
 
         // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
         // it's PagerAdapter set.
