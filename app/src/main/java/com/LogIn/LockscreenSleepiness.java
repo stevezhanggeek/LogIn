@@ -32,11 +32,13 @@ public class LockscreenSleepiness extends Lockscreen {
 
             @Override
             public void onReleased(View v, int handle) {
+                TextView txt = (TextView) findViewById(R.id.textView);
+                txt.setText("");
             }
 
             @Override
             public void onTrigger(View v, int target) {
-                Utility.parseWrite(target - 2);
+                Utility.sleepinessWriteToParse(target - 2);
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();

@@ -16,6 +16,8 @@ import net.frakbot.glowpadbackport.GlowPadView;
 
 public class LockscreenMood extends Lockscreen {
     private boolean grid_triggered = false;
+    private int saved_value_negative_positive = 0;
+    private int saved_value_low_high = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,26 +39,28 @@ public class LockscreenMood extends Lockscreen {
             public boolean onTouch(View v, MotionEvent e)
             {
                 if (grid_triggered) {
-                    final TextView txt = (TextView) findViewById(R.id.textView);
-
                     double grid_size = moodGrid.getWidth()/12;
-                    String negative_positive = "Negative";
-                    int level_negative_positive = (int)((double)(e.getX() - moodGrid.getWidth() / 2) / grid_size);
-                    if (e.getX() > moodGrid.getWidth() / 2) {
-                        negative_positive = "Positive";
+
+                    String negative_positive = "Positive";
+                    saved_value_negative_positive = Math.abs((int)((double)(e.getX() - moodGrid.getWidth() / 2) / grid_size)) + 1;
+                    if (e.getX() < moodGrid.getWidth() / 2) {
+                        negative_positive = "Negative";
+                        saved_value_negative_positive = -saved_value_negative_positive;
                     }
 
-                    String low_high = "High";
-                    int level_low_high = (int)((double)(e.getY() - moodGrid.getHeight() / 2) / grid_size);
-                    if (e.getY() > moodGrid.getHeight() / 2) {
-                        low_high = "Low";
+                    String low_high = "Low";
+                    saved_value_low_high = Math.abs((int)((double)(e.getY() - moodGrid.getHeight() / 2) / grid_size)) + 1;
+                    if (e.getY() < moodGrid.getHeight() / 2) {
+                        low_high = "High";
+                        saved_value_low_high = -saved_value_low_high;
                     }
 
                     String sleepiness_description =
-                            Utility.convertScaleValueToAdj(Math.abs(level_negative_positive) + 1) + " "
+                            Utility.convertScaleValueToAdj(Math.abs(saved_value_negative_positive)) + " "
                                     + negative_positive + "\n" +
-                                    Utility.convertScaleValueToAdj(Math.abs(level_low_high) + 1) + " "
+                                    Utility.convertScaleValueToAdj(Math.abs(saved_value_low_high)) + " "
                                     + low_high;
+                    TextView txt = (TextView) findViewById(R.id.textView);
                     txt.setText(sleepiness_description);
                 }
                 return false;
@@ -71,6 +75,7 @@ public class LockscreenMood extends Lockscreen {
             @Override
             public void onReleased(View v, int handle) {
                 if (grid_triggered) {
+                    Utility.moodWriteToParse(saved_value_negative_positive, saved_value_low_high);
                     moodGrid.setVisibility(View.INVISIBLE);
                     whiteBackground.setVisibility(View.INVISIBLE);
                     finish();
@@ -79,7 +84,6 @@ public class LockscreenMood extends Lockscreen {
 
             @Override
             public void onTrigger(View v, int target) {
-                Utility.parseWrite(target - 2);
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();

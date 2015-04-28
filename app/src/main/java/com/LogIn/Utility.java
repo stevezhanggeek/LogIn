@@ -71,6 +71,32 @@ public class Utility extends Activity {
         */
     }
 
+    public static void sleepinessWriteToParse(int value) {
+        ParseObject parseObj = new ParseObject(name_datastore);
+        parseObj.put("time", new Date());
+        parseObj.put("value", value);
+        parseObj.saveInBackground();
+        parseObj.pinInBackground();
+    }
+
+    public static void depressionWriteToParse(String type, int value) {
+        ParseObject parseObj = new ParseObject(name_datastore);
+        parseObj.put("time", new Date());
+        parseObj.put("type", type);
+        parseObj.put("value", value);
+        parseObj.saveInBackground();
+        parseObj.pinInBackground();
+    }
+
+    public static void moodWriteToParse(int negative_positive, int low_high) {
+        ParseObject parseObj = new ParseObject(name_datastore);
+        parseObj.put("time", new Date());
+        parseObj.put("negative_positive", negative_positive);
+        parseObj.put("low_high", low_high);
+        parseObj.saveInBackground();
+        parseObj.pinInBackground();
+    }
+
     public static void parseWrite(final int value) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("value", value);
@@ -169,7 +195,7 @@ public class Utility extends Activity {
     public static String convertScaleValueToAdj(int value) {
         switch(value) {
             case 1:
-                return "Not at all";
+                return "Minimal";
             case 2:
                 return "Slightly";
             case 3:
@@ -178,6 +204,23 @@ public class Utility extends Activity {
                 return "Very";
             case 5:
                 return "Extremely";
+            default:
+                return "";
+        }
+    }
+
+    public static String convertScaleValueToAdv(int value) {
+        switch(value) {
+            case 1:
+                return "Minimal";
+            case 2:
+                return "Fair";
+            case 3:
+                return "Good";
+            case 4:
+                return "Very Good";
+            case 5:
+                return "Extreme";
             default:
                 return "";
         }

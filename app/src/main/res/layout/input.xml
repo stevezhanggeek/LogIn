@@ -41,7 +41,7 @@
             android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_weight="1"
-            android:text="Not Sleepy"
+            android:text="Awake"
             />
 
         <TextView

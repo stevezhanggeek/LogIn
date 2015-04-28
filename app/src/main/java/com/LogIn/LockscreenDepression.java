@@ -32,11 +32,17 @@ public class LockscreenDepression extends Lockscreen {
 
             @Override
             public void onReleased(View v, int handle) {
+                TextView txt = (TextView) findViewById(R.id.textView);
+                txt.setText("");
             }
 
             @Override
             public void onTrigger(View v, int target) {
-                Utility.parseWrite(target - 2);
+                String type = "Accomplishment";
+                if (glowPad.mhandle == 0) {
+                    type = "Pleasure";
+                }
+                Utility.depressionWriteToParse(type, target - 1);
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();
@@ -56,9 +62,9 @@ public class LockscreenDepression extends Lockscreen {
                 String depression_description;
 
                 if (glowPad.mhandle == 0) {
-                    depression_description = "Pleasure " + String.valueOf(target - 1);
+                    depression_description = Utility.convertScaleValueToAdv(target - 1) + " Pleasure";
                 } else {
-                    depression_description = "Accomplishment " + String.valueOf(target - 1);
+                    depression_description = Utility.convertScaleValueToAdv(target - 1) + " Accomplishment";
                 }
                 txt.setText(depression_description);
             }
