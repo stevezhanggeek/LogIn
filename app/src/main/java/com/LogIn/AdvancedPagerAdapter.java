@@ -26,6 +26,8 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import net.frakbot.glowpadbackport.util.Const;
+
 import java.util.Calendar;
 
 class AdvancedPagerAdapter extends PagerAdapter {
@@ -107,12 +109,25 @@ class AdvancedPagerAdapter extends PagerAdapter {
                 }
             });
         } else {
-            view = inflater.inflate(R.layout.visualization_scroll, container, false);
-            container.addView(view);
+            if (Utility.LogInType.equals("Sleepiness")) {
+                view = inflater.inflate(R.layout.visualization_scroll_sleepiness, container, false);
+                container.addView(view);
 
-            CalendarViewDepression cal = (CalendarViewDepression) view.findViewById(R.id.CalendarViewDepression);
-            // Let view know which page it is
-            cal.setPageIndex(position);
+                CalendarViewSleepiness cal = (CalendarViewSleepiness) view.findViewById(R.id.CalendarViewSleepiness);
+                cal.setPageIndex(position);
+            } else if (Utility.LogInType.equals("Depression")) {
+                view = inflater.inflate(R.layout.visualization_scroll_depression, container, false);
+                container.addView(view);
+
+                CalendarViewDepression cal = (CalendarViewDepression) view.findViewById(R.id.CalendarViewDepression);
+                cal.setPageIndex(position);
+            } else {
+                view = inflater.inflate(R.layout.visualization_scroll_mood, container, false);
+                container.addView(view);
+
+                CalendarViewMood cal = (CalendarViewMood) view.findViewById(R.id.CalendarViewMood);
+                cal.setPageIndex(position);
+            }
         }
         return view;
     }

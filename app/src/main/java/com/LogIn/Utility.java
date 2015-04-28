@@ -19,13 +19,15 @@ import java.util.UUID;
 
 public class Utility extends Activity {
     private static String deviceID = "";
-    public static int num_days_experiment_length = 17;
-    public static int year_start = 2015;
-    public static int month_start = 3; // start from 0
-    public static int day_start = 21;
-    public static int hour_start = 10;
-    public static int num_hour_experiment_length = 14;
-    public static String name_datastore = "Logs_";
+    private static String name_datastore = "Logs_";
+
+    public static final String LogInType = "Mood";
+    public static final int num_days_experiment_length = 17;
+    public static final int year_start = 2015;
+    public static final int month_start = 3; // start from 0
+    public static final int day_start = 21;
+    public static final int hour_start = 10;
+    public static final int num_hour_experiment_length = 14;
 
     public static List<ParseObject> m_valueList;
 
@@ -45,30 +47,6 @@ public class Utility extends Activity {
         // Parse doesn't allow "-" in object name
         deviceID = getUniquePsuedoID().replace("-", "");
         name_datastore = name_datastore + deviceID;
-        /*
-        ParseQuery<ParseObject> query;
-        query = ParseQuery.getQuery("Parameters");
-        query.getInBackground("G9vWUL34Sa", new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    //HOST = object.getString("IP_Address");
-                } else {
-                    // something went wrong
-                }
-            }
-        });
-        query = ParseQuery.getQuery("ComplexGesture");
-        query.whereEqualTo("deviceID", deviceID);
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (object == null) {
-                    // No result
-                } else {
-//                    complexGestureString = object.getString("GestureString");
-                }
-            }
-        });
-        */
     }
 
     public static void sleepinessWriteToParse(int value) {
