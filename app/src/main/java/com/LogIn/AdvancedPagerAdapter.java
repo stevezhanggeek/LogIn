@@ -16,21 +16,19 @@
 
 package com.LogIn;
 
-import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.frakbot.glowpadbackport.util.Const;
+import net.frakbot.glowpadbackport.GlowPadView;
 
 import java.util.Calendar;
 
 class AdvancedPagerAdapter extends PagerAdapter {
+    private boolean touchEnabled = true;
 
     @Override
     public int getCount() {
@@ -64,63 +62,97 @@ class AdvancedPagerAdapter extends PagerAdapter {
      */
     @Override
     public Object instantiateItem(final ViewGroup container, int position) {
-        View view;
+        final View view;
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
-        if (position == 0) {
-            view = inflater.inflate(R.layout.input, container, false);
-            container.addView(view);
 
-            final SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
-            final TextView txt = (TextView) view.findViewById(R.id.textView2);
-
-            Button btn = (Button) view.findViewById(R.id.button_submit_log);
-            btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    RadioGroup radioGroup = (RadioGroup) container.findViewById(R.id.radio_group);
-                    if (radioGroup.getCheckedRadioButtonId() == R.id.accomplishment) {
-                        System.out.println("accomplishment");
-                    } else if (radioGroup.getCheckedRadioButtonId() == R.id.pleasure) {
-                        System.out.println("pleasure");
-                    }
-                    Utility.parseWrite(seekBar.getProgress() + 1);
-                    Utility.getDataFromParse();
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Utility.updateViewPager(container);
-                        }
-                    }, 1000);
-                }
-            });
-
-            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
-                }
-
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    txt.setText(Utility.convertSleepinessValueToDescription(seekBar.getProgress() + 1));
-                }
-            });
-        } else {
-            if (Utility.LogInType.equals("Sleepiness")) {
+        if (Utility.LogInType.equals("Sleepiness")) {
+            if (position == 0) {
+                view = inflater.inflate(R.layout.input_sleepiness, container, false);
+                container.addView(view);
+            } else {
                 view = inflater.inflate(R.layout.visualization_scroll_sleepiness, container, false);
                 container.addView(view);
 
                 CalendarViewSleepiness cal = (CalendarViewSleepiness) view.findViewById(R.id.CalendarViewSleepiness);
                 cal.setPageIndex(position);
-            } else if (Utility.LogInType.equals("Depression")) {
+            }
+        } else if (Utility.LogInType.equals("Depression")) {
+            if (position == 0) {
+                view = inflater.inflate(R.layout.input_depression, container, false);
+
+                view.setOnTouchListener(new View.OnTouchListener(){
+                    @Override
+                    public boolean onTouch(View arg0, MotionEvent arg1) {
+                        return true;
+                    }
+                });
+
+                container.addView(view);
+
+                final GlowPadView glowPad = (GlowPadView) view.findViewById(R.id.incomingCallWidget);
+                glowPad.setOnTouchListener(new View.OnTouchListener(){
+                    @Override
+                    public boolean onTouch(View arg0, MotionEvent arg1) {
+                        return false;
+                    }
+                });
+
+                glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
+                    @Override
+                    public void onGrabbed(View v, int handle) {
+                        touchEnabled = false;
+                    }
+
+                    @Override
+                    public void onReleased(View v, int handle) {
+                        TextView txt = (TextView) view.findViewById(R.id.textView);
+                        txt.setText("");
+                        touchEnabled = true;
+                    }
+
+                    @Override
+                    public void onTrigger(View v, int target) {
+                        String type = "Accomplishment";
+                        if (glowPad.mhandle == 0) {
+                            type = "Pleasure";
+                        }
+                        Utility.depressionWriteToParse(type, target - 1);
+                        glowPad.reset(true);
+                    }
+
+                    @Override
+                    public void onGrabbedStateChange(View v, int handle) {
+                    }
+
+                    @Override
+                    public void onFinishFinalAnimation() {
+                    }
+
+                    @Override
+                    public void onMovedOnTarget(int target) {
+                        final TextView txt = (TextView) view.findViewById(R.id.textView);
+                        String depression_description;
+
+                        if (glowPad.mhandle == 0) {
+                            depression_description = Utility.convertScaleValueToAdv(target - 1) + " Pleasure";
+                        } else {
+                            depression_description = Utility.convertScaleValueToAdv(target - 1) + " Accomplishment";
+                        }
+                        txt.setText(depression_description);
+                    }
+                });
+
+            } else {
                 view = inflater.inflate(R.layout.visualization_scroll_depression, container, false);
                 container.addView(view);
 
                 CalendarViewDepression cal = (CalendarViewDepression) view.findViewById(R.id.CalendarViewDepression);
                 cal.setPageIndex(position);
+            }
+        } else {
+            if (position == 0) {
+                view = inflater.inflate(R.layout.input_mood, container, false);
+                container.addView(view);
             } else {
                 view = inflater.inflate(R.layout.visualization_scroll_mood, container, false);
                 container.addView(view);
@@ -129,6 +161,7 @@ class AdvancedPagerAdapter extends PagerAdapter {
                 cal.setPageIndex(position);
             }
         }
+
         return view;
     }
 
