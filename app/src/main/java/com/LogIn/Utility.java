@@ -172,24 +172,18 @@ public class Utility extends Activity {
     }
 
     public static int convertSleepinessValueToColor(int value) {
-        switch(value) {
-            case 1:
-                return Color.rgb(15,240,0);
-            case 2:
-                return Color.rgb(55,200,0);
-            case 3:
-                return Color.rgb(95,160,0);
-            case 4:
-                return Color.rgb(135,120,0);
-            case 5:
-                return Color.rgb(175,80,0);
-            case 6:
-                return Color.rgb(215,40,0);
-            case 7:
-                return Color.rgb(255,0,0);
-            default:
-                return Color.BLACK;
-        }
+        int diff = 255/6;
+        return Color.rgb((value-1)*diff, 255 - (value-1)*diff, 0);
+    }
+
+    public static int convertDepressionValueToColor(int value) {
+        int diff = 255/4;
+        return Color.rgb((value-1)*diff, 255 - (value-1)*diff, 0);
+    }
+
+    public static int convertMoodValueToColor(int value) {
+        int diff = 255/9;
+        return Color.rgb(255/2 - value*diff, 255/2 + value*diff, 0);
     }
 
     public static String convertScaleValueToAdj(int value) {

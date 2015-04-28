@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CalendarView extends View {
+public class CalendarViewSleepiness extends View {
     private ShapeDrawable mDrawable;
     private int index_day;
     private List<ParseObject> m_valueList;
@@ -34,12 +34,12 @@ public class CalendarView extends View {
         m_valueList = Utility.getDataFromParse();
     }
 
-    public CalendarView(Context context) {
+    public CalendarViewSleepiness(Context context) {
         super(context);
         init();
     }
 
-    public CalendarView(Context context, AttributeSet attrs)
+    public CalendarViewSleepiness(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();

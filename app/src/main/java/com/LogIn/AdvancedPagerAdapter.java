@@ -110,8 +110,8 @@ class AdvancedPagerAdapter extends PagerAdapter {
             view = inflater.inflate(R.layout.visualization_scroll, container, false);
             container.addView(view);
 
+            CalendarViewDepression cal = (CalendarViewDepression) view.findViewById(R.id.CalendarViewDepression);
             // Let view know which page it is
-            CalendarView cal = (CalendarView) view.findViewById(R.id.CalendarView);
             cal.setPageIndex(position);
         }
         return view;
