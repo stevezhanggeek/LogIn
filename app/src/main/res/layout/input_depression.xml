@@ -7,25 +7,16 @@
     android:background="#000000"
     android:id="@+id/test">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logs"
-        android:id="@+id/button_viz"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick="openVisualization" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_viz"
         android:fontFamily="sans-serif"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp" />
 
     <net.frakbot.glowpadbackport.GlowPadView
         android:id="@+id/incomingCallWidget"
@@ -44,5 +35,6 @@
         app:glowRadius="@dimen/glowpadview_glow_radius"
         app:pointDrawable="@drawable/glow_dot"
         android:layout_below="@+id/textView" />
+
 
 </RelativeLayout>

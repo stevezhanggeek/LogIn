@@ -77,10 +77,11 @@ public class CalendarViewDepression extends View {
             for (ParseObject object : m_valueList) {
                 String type = object.getString("type");
                 int value = object.getInt("value");
-                int startX = (value - 1) * (width - text_width) / 10;
+                int startX = 0;
                 if (type.equals("Pleasure")) {
                     startX += (width + text_width) / 2;
                 }
+                int endX = startX + value * (width - text_width) / 10;
 
                 Date time = object.getDate("time");
                 Calendar cal = Calendar.getInstance();
@@ -95,7 +96,7 @@ public class CalendarViewDepression extends View {
 
                     int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
                     paint.setColor(Utility.convertDepressionValueToColor(value));
-                    RectF rf = new RectF(startX, startY, startX + (width - text_width) / 10 - 5, startY + 20);
+                    RectF rf = new RectF(startX, startY, endX, startY + 20);
                     canvas.drawRoundRect(rf, 15, 15, paint);
                 }
             }

@@ -16,7 +16,7 @@
 
     <application
         android:name=".LogInApp"
-        android:label="@string/app_name"
+        android:label="LogIn"
         android:icon="@drawable/ic_launcher">
 
         <activity
@@ -29,10 +29,21 @@
             </intent-filter>
         </activity>
 
+        <!-- A child of the main activity -->
+        <activity
+            android:name=".Setting"
+            android:label="Setting"
+            android:parentActivityName=".MainActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
         <activity
             android:name=".Visualization"
             android:launchMode="singleInstance"
-            android:label="Viz">
+            android:label="LogIn-Result">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

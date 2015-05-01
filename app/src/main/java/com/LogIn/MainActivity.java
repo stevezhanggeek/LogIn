@@ -18,6 +18,9 @@ package com.LogIn;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -32,16 +35,46 @@ public class MainActivity extends Activity {
     private int saved_value_negative_positive = 0;
     private int saved_value_low_high = 0;
 
-    public void openVisualization(View view) {
+    public void openVisualization() {
         Intent intent = new Intent(this, Visualization.class);
 //    intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
+    public void openSettings() {
+        Intent intent = new Intent(this, Setting.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.input, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_visualization:
+                openVisualization();
+                return true;
+            case R.id.action_settings:
+                openSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getActionBar().setDisplayShowTitleEnabled(false);
         startService(new Intent(this, LockscreenService.class));
 
         AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
@@ -52,8 +85,10 @@ public class MainActivity extends Activity {
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);
 
-            final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
+            final TextView txt = (TextView) findViewById(R.id.textView);
+            txt.setText("Please Log Your Sleepiness");
 
+            final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
             glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
                 @Override
                 public void onGrabbed(View v, int handle) {
@@ -61,15 +96,14 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onReleased(View v, int handle) {
-                    TextView txt = (TextView) findViewById(R.id.textView);
-                    txt.setText("");
+                    txt.setText("Please Log Your Sleepiness");
                 }
 
                 @Override
                 public void onTrigger(View v, int target) {
                     Utility.sleepinessWriteToParse(target - 2);
                     glowPad.reset(true);
-                    openVisualization(null);
+                    openVisualization();
                 }
 
                 @Override
@@ -90,6 +124,9 @@ public class MainActivity extends Activity {
         } else if (Utility.LogInType.equals("Depression")) {
             setContentView(R.layout.input_depression);
 
+            final TextView txt = (TextView) findViewById(R.id.textView);
+            txt.setText("Please Log Your Pleasure/Accomplishment");
+
             final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
             glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
                 @Override
@@ -98,8 +135,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onReleased(View v, int handle) {
-                    TextView txt = (TextView) findViewById(R.id.textView);
-                    txt.setText("");
+                    txt.setText("Please Log Your Pleasure/Accomplishment");
                 }
 
                 @Override
@@ -110,7 +146,7 @@ public class MainActivity extends Activity {
                     }
                     Utility.depressionWriteToParse(type, target - 1);
                     glowPad.reset(true);
-                    openVisualization(null);
+                    openVisualization();
                 }
 
                 @Override
@@ -136,6 +172,9 @@ public class MainActivity extends Activity {
             });
         } else {
             setContentView(R.layout.input_mood);
+
+            final TextView txt = (TextView) findViewById(R.id.textView);
+            txt.setText("Please Log Your Mood");
 
             final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
             final ImageView moodGrid = (ImageView) findViewById(R.id.mood_grid);
@@ -181,6 +220,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onReleased(View v, int handle) {
+                    txt.setText("Please Log Your Mood");
                     if (grid_triggered) {
                         Utility.moodWriteToParse(saved_value_negative_positive, saved_value_low_high);
                         moodGrid.setVisibility(View.INVISIBLE);
@@ -190,7 +230,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void onTrigger(View v, int target) {
                     glowPad.reset(true);
-                    openVisualization(null);
+                    openVisualization();
                 }
 
                 @Override
