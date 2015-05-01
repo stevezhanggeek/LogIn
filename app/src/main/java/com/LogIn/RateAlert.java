@@ -16,56 +16,48 @@
 
 package com.LogIn;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class RateAlert extends Activity {
-
-    private int m_alarmId;
+    private int rating = 0;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Get the alarm ID from the intent extra data
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
-        if (extras != null) {
-            m_alarmId = extras.getInt("AlarmID", -1);
+        setContentView(R.layout.rate_alert);
+        final TextView txt = (TextView) findViewById(R.id.textView);
+        if (Utility.LogInType.equals("Sleepiness")) {
+            txt.setText("Please Rate Sleepiness");
+        } else if (Utility.LogInType.equals("Depression")) {
+            txt.setText("Please Rate Depression");
         } else {
-            m_alarmId = -1;
+            txt.setText("Please Rate Mood");
         }
 
-        // Show the popup dialog
-        showDialog(0);
-    }
+        final SeekBar seek_bar = (SeekBar) findViewById(R.id.seekBar);
 
-    @Override
-    protected Dialog onCreateDialog(int id)
-    {
-        super.onCreateDialog(id);
+        Button btn = (Button) findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Utility.rateWriteToParse(seek_bar.getProgress() + 1);
+                txt.setText("Thanks for your rating!\nThis screen will be closed now.");
 
-        // Build the dialog
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-        alert.setTitle("ALARM REMINDER");
-        alert.setMessage("Its time for the alarm ");
-        alert.setCancelable(false);
-
-        alert.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                RateAlert.this.finish();
+                // Exit rate alert after 3 seconds
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 3000);
             }
         });
 
-        // Create and return the dialog
-        AlertDialog dlg = alert.create();
-
-        return dlg;
     }
 }

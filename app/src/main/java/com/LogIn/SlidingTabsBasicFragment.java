@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Calendar;
+
 public class SlidingTabsBasicFragment extends Fragment {
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -67,7 +69,8 @@ public class SlidingTabsBasicFragment extends Fragment {
         mViewPager.setAdapter(new AdvancedPagerAdapter());
         // Max cache screens
         mViewPager.setOffscreenPageLimit(mViewPager.getAdapter().getCount());
-        mViewPager.setCurrentItem(4, true);
+        // Go to current day
+        mViewPager.setCurrentItem(Utility.getDaysDiff(), true);
 
         // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
         // it's PagerAdapter set.

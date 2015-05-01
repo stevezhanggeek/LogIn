@@ -21,7 +21,7 @@ public class Utility extends Activity {
     private static String deviceID = "";
     private static String name_datastore = "Logs_";
 
-    public static final String LogInType = "Mood";
+    public static final String LogInType = "Depression";
     public static final int num_days_experiment_length = 17;
     public static final int year_start = 2015;
     public static final int month_start = 3; // start from 0
@@ -75,10 +75,11 @@ public class Utility extends Activity {
         parseObj.pinInBackground();
     }
 
-    public static void parseWrite(final int value) {
-        ParseObject parseObj = new ParseObject(name_datastore);
-        parseObj.put("value", value);
+    public static void rateWriteToParse(int rate) {
+        ParseObject parseObj = new ParseObject("Rating");
         parseObj.put("time", new Date());
+        parseObj.put("deviceID", deviceID);
+        parseObj.put("rate", rate);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
     }
@@ -98,25 +99,15 @@ public class Utility extends Activity {
         return m_valueList;
     }
 
-    public static void updateViewPager(ViewGroup v) {
-        final ViewPager vp = (ViewPager) v.findViewById(R.id.viewpager);
-        if (vp!=null) {
-            vp.setAdapter(new AdvancedPagerAdapter());
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, Utility.year_start);
-                    cal.set(Calendar.MONTH, Utility.month_start);
-                    cal.set(Calendar.DAY_OF_MONTH, Utility.day_start);
+    public static int getDaysDiff() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Utility.year_start);
+        cal.set(Calendar.MONTH, Utility.month_start);
+        cal.set(Calendar.DAY_OF_MONTH, Utility.day_start);
 
-                    long diff = new Date().getTime() - cal.getTime().getTime();
-                    long elapsedDays = diff / (1000*60*60*24);
-                    vp.setCurrentItem((int)elapsedDays+1);
-                }
-            }, 100);
-        }
+        long diff = new Date().getTime() - cal.getTime().getTime();
+        long elapsedDays = diff / (1000*60*60*24);
+        return (int)elapsedDays;
     }
 
     public static String convertSleepinessValueToDescription(int value) {

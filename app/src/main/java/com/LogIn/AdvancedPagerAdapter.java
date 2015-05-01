@@ -44,7 +44,6 @@ class AdvancedPagerAdapter extends PagerAdapter {
         cal.set(Calendar.YEAR, Utility.year_start);
         cal.set(Calendar.MONTH, Utility.month_start);
         cal.set(Calendar.DAY_OF_MONTH, Utility.day_start);
-
         cal.add(Calendar.DATE, position);
 
         return cal.get(Calendar.MONTH)+1 + "/" + cal.get(Calendar.DAY_OF_MONTH);
