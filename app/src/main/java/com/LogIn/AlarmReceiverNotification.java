@@ -10,17 +10,12 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 
 import java.util.Calendar;
 
-public class AlarmReceiver extends WakefulBroadcastReceiver {
+public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
   
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent alarmIntent = new Intent();
-        alarmIntent.setClass(context, RateAlert.class);
-        alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(alarmIntent);
-
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         context,
@@ -43,7 +38,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                         .setSmallIcon(R.drawable.glow_dot)
                         .setContentTitle("It's time to LogIn!")
                         .setContentText(text_content)
-                        .setContentIntent(resultPendingIntent);
+                        .setContentIntent(resultPendingIntent)
+                        .setAutoCancel(true);
 
         // Sets an ID for the notification, easy to remove then
         int mNotificationId = 715;
@@ -51,17 +47,17 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
-    public void setAlarm(Context context) {
+    public void setNotificationAlarm(Context context) {
         alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, AlarmReceiverNotification.class);
         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.HOUR_OF_DAY, Utility.hour_start);
         calendar.set(Calendar.MINUTE, 00);
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+                calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
     }
 }

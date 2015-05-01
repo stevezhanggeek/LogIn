@@ -75,7 +75,8 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".AlarmReceiver"></receiver>
+        <receiver android:name=".AlarmReceiverRating"></receiver>
+        <receiver android:name=".AlarmReceiverNotification"></receiver>
 
     </application>
 

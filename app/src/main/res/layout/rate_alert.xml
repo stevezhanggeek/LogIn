@@ -7,11 +7,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Intrusiveness"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Minimal Intrusive"
+            android:textColor="#FFF"
+            android:layout_weight="1"
+            android:gravity="left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Extreme Intrusive"
+            android:layout_weight="1"
+            android:textColor="#FFF"
+            android:gravity="right"/>
+    </LinearLayout>
 
     <SeekBar
         android:layout_width="match_parent"
@@ -21,7 +46,7 @@
         android:layout_marginRight="40dp"
         android:max="4"
         android:progress="2"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,5 +54,5 @@
         android:text="Submit My Rating"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="40dp" />
 </LinearLayout>
