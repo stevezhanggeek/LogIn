@@ -64,6 +64,7 @@ public class CalendarViewDepression extends View {
         paint.setTextSize(textSize);
         int hour_vertical_interval = 300;
         int text_width = 100;
+        int rect_height = 10;
 
         paint.setAntiAlias(true);
         for (int i = Utility.hour_start; i < Utility.hour_start + Utility.num_hour_experiment_length; i++) {
@@ -74,6 +75,7 @@ public class CalendarViewDepression extends View {
         }
 
         if (m_valueList != null) {
+            int lastY = 0;
             for (ParseObject object : m_valueList) {
                 String type = object.getString("type");
                 int value = object.getInt("value");
@@ -95,9 +97,14 @@ public class CalendarViewDepression extends View {
                     int minute = cal.get(Calendar.MINUTE);
 
                     int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
+                    // We make sure the value list is ascending based on create time
+                    if (startY < lastY + rect_height) {
+                        startY = lastY + rect_height;
+                    }
                     paint.setColor(Utility.convertDepressionValueToColor(value));
-                    RectF rf = new RectF(startX, startY, endX, startY + 20);
-                    canvas.drawRoundRect(rf, 15, 15, paint);
+                    RectF rf = new RectF(startX, startY, endX, startY + rect_height);
+                    canvas.drawRect(rf, paint);
+                    lastY = startY;
                 }
             }
         }

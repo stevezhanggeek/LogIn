@@ -74,9 +74,8 @@ public class CalendarViewSleepiness extends View {
             canvas.drawLine(text_width, y, width, y, paint);
         }
 
-        int lastY = 0;
-
         if (m_valueList != null) {
+            int lastY = 0;
             for (ParseObject object : m_valueList) {
                 int value = object.getInt("value");
                 int startX = text_width;
@@ -92,8 +91,6 @@ public class CalendarViewSleepiness extends View {
                 if (year == Utility.year_start && month == Utility.month_start && day == Utility.day_start) {
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
                     int minute = cal.get(Calendar.MINUTE);
-
-                    System.out.println(minute);
 
                     int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
                     // We make sure the value list is ascending based on create time
