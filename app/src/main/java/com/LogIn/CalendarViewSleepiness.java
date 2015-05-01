@@ -65,6 +65,7 @@ public class CalendarViewSleepiness extends View {
         paint.setTextSize(textSize);
         int hour_vertical_interval = 300;
         int text_width = 100;
+        int rect_height = 10;
 
         paint.setAntiAlias(true);
         for (int i = Utility.hour_start; i < Utility.hour_start + Utility.num_hour_experiment_length; i++) {
@@ -73,11 +74,13 @@ public class CalendarViewSleepiness extends View {
             canvas.drawLine(text_width, y, width, y, paint);
         }
 
+        int lastY = 0;
+
         if (m_valueList != null) {
             for (ParseObject object : m_valueList) {
                 int value = object.getInt("value");
-//                int startX = text_width + 100;
-                int startX = text_width + (value - 1) * (width - text_width) / 7;
+                int startX = text_width;
+                int endX = startX + value * (width - text_width) / 7;
 
                 Date time = object.getDate("time");
                 Calendar cal = Calendar.getInstance();
@@ -90,10 +93,17 @@ public class CalendarViewSleepiness extends View {
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
                     int minute = cal.get(Calendar.MINUTE);
 
+                    System.out.println(minute);
+
                     int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
+                    // We make sure the value list is ascending based on create time
+                    if (startY < lastY + rect_height) {
+                        startY = lastY + rect_height;
+                    }
                     paint.setColor(Utility.convertSleepinessValueToColor(value));
-                    RectF rf = new RectF(startX, startY, startX + (width - text_width) / 7 - 10, startY + 20);
-                    canvas.drawRoundRect(rf, 15, 15, paint);
+                    RectF rf = new RectF(startX, startY, endX, startY + rect_height);
+                    canvas.drawRect(rf, paint);
+                    lastY = startY;
                 }
             }
         }

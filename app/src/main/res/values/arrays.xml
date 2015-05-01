@@ -26,6 +26,6 @@
     </array>
     <array name="targets_mood">
         <item>@drawable/lock</item>
-        <item>@drawable/level_1</item>
+        <item>@drawable/grid_icon</item>
     </array>
 </resources>

@@ -21,7 +21,7 @@ public class Utility extends Activity {
     private static String deviceID = "";
     private static String name_datastore = "Logs_";
 
-    public static final String LogInType = "Depression";
+    public static final String LogInType = "Sleepiness";
     public static final int num_days_experiment_length = 17;
     public static final int year_start = 2015;
     public static final int month_start = 3; // start from 0
@@ -87,6 +87,7 @@ public class Utility extends Activity {
     public static List<ParseObject> getDataFromParse() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(name_datastore);
         query.fromLocalDatastore();
+        query.addAscendingOrder("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> valueList, ParseException e) {
                 if (e == null) {

@@ -21,15 +21,17 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginLeft="100px"
             android:text="Awake"
-            android:textColor="#00FF00"
-            android:layout_weight="1"
+            android:textColor="#00DD00"
+            android:layout_weight="0"
             android:gravity="left" />
 
         <View
-            android:layout_width="170dp"
-            android:layout_height="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="6dp"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_weight="1"
             android:background="@drawable/gradient">
         </View>
@@ -39,8 +41,9 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginRight="10dp"
             android:text="Sleepy"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:textColor="#FF0000"/>
     </LinearLayout>
 
