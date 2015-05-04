@@ -25,7 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,11 +78,6 @@ public class MainActivity extends Activity {
 //        getActionBar().setDisplayShowTitleEnabled(false);
         startService(new Intent(this, LockscreenService.class));
 
-        AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
-        alarm_rating.setRatingAlarm(this);
-        AlarmReceiverNotification alarm_notification = new AlarmReceiverNotification();
-        alarm_notification.setNotificationAlarm(this);
-
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String login_type = SP.getString("pref_key_login_type", "");
         Utility.LogInType = login_type;
@@ -96,6 +90,11 @@ public class MainActivity extends Activity {
         Utility.day_start = Integer.parseInt(start_day);
         Utility.hour_start = Integer.parseInt(start_hour);
         Utility.hour_rate = Integer.parseInt(rate_hour);
+
+        AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
+        alarm_rating.setRatingAlarm(this);
+        AlarmReceiverNotification alarm_notification = new AlarmReceiverNotification();
+        alarm_notification.setNotificationAlarm(this);
 
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);

@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
@@ -16,6 +18,8 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
   
     @Override
     public void onReceive(Context context, Intent intent) {
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         context,
@@ -37,8 +41,14 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.glow_dot)
                         .setContentTitle("It's time to LogIn!")
+                        .setSound(soundUri)
                         .setContentText(text_content)
                         .setContentIntent(resultPendingIntent)
+                        .addAction(0, "1", resultPendingIntent)
+                        .addAction(0, "2", resultPendingIntent)
+                        .addAction(0, "3", resultPendingIntent)
+                        .addAction(0, "4", resultPendingIntent)
+                        .addAction(0, "5", resultPendingIntent)
                         .setAutoCancel(true);
 
         // Sets an ID for the notification, easy to remove then

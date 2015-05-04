@@ -20,8 +20,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
 
 public class RateAlert extends Activity {
     private int rating = 0;
@@ -32,13 +36,27 @@ public class RateAlert extends Activity {
 
         setContentView(R.layout.rate_alert);
         final TextView txt = (TextView) findViewById(R.id.textView);
+        String description = "At ";
+        /*
         if (Utility.LogInType.equals("Sleepiness")) {
-            txt.setText("Please Rate Sleepiness");
+            description += "Sleepiness";
         } else if (Utility.LogInType.equals("Depression")) {
-            txt.setText("Please Rate Depression");
+            description += "Depression";
         } else {
-            txt.setText("Please Rate Mood");
+            description += "Mood";
         }
+        */
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        description += (new DateFormatSymbols().getMonths()[month] + " " + Integer.toString(day));
+
+        description += ", please rate intrusiveness of LogIn under condition 1";
+        txt.setText(description);
+
+        final ImageView image_view = (ImageView) findViewById(R.id.imageView);
+
+        image_view.setImageResource(R.drawable.preview_condition_1);
 
         final SeekBar seek_bar = (SeekBar) findViewById(R.id.seekBar);
 

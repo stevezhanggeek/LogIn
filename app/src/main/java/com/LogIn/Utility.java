@@ -29,6 +29,7 @@ public class Utility extends Activity {
     public static int hour_start = 10;
     public static final int num_hour_experiment_length = 14;
     public static int hour_rate = 22;
+    public static int condition = 1;
 
     public static List<ParseObject> m_valueList;
 
