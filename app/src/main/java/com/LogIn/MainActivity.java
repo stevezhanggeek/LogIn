@@ -17,7 +17,9 @@
 package com.LogIn;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -82,6 +84,11 @@ public class MainActivity extends Activity {
         AlarmReceiverNotification alarm_notification = new AlarmReceiverNotification();
         alarm_notification.setNotificationAlarm(this);
 
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String login_type = SP.getString("pref_key_login_type", "");
+        Utility.LogInType = login_type;
+        System.out.println(Utility.LogInType);
+
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);
 
@@ -103,6 +110,7 @@ public class MainActivity extends Activity {
                 public void onTrigger(View v, int target) {
                     Utility.sleepinessWriteToParse(target - 2);
                     glowPad.reset(true);
+                    glowPad.setVisibility(View.VISIBLE);
                     openVisualization();
                 }
 
@@ -146,6 +154,7 @@ public class MainActivity extends Activity {
                     }
                     Utility.depressionWriteToParse(type, target - 1);
                     glowPad.reset(true);
+                    glowPad.setVisibility(View.VISIBLE);
                     openVisualization();
                 }
 
@@ -230,6 +239,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void onTrigger(View v, int target) {
                     glowPad.reset(true);
+                    glowPad.setVisibility(View.VISIBLE);
                     openVisualization();
                 }
 

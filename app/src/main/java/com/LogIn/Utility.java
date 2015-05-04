@@ -21,7 +21,7 @@ public class Utility extends Activity {
     private static String deviceID = "";
     private static String name_datastore = "Logs_";
 
-    public static final String LogInType = "Mood";
+    public static String LogInType = "Depression";
     public static final int num_days_experiment_length = 17;
     public static final int year_start = 2015;
     public static final int month_start = 3; // start from 0

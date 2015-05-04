@@ -5,16 +5,28 @@
     <PreferenceCategory
         android:title="1"
         android:key="pref_key_storage_settings">
-        <CheckBoxPreference
-            android:key="pref_key_auto_delete"
+        <ListPreference
+            android:key="pref_key_login_type"
             android:summary=""
-            android:title="First"
-            android:defaultValue="false"/>
+            android:title="LogIn Type"
+            android:defaultValue="Sleepiness"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues"/>
         <Preference
+            android:key="btnDateFilter"
+            android:summary="Reschedule using current setting"
+            android:title="Reschedule" />
+        <EditTextPreference
+            android:key="pref_key_start_month"
+            android:title="Start Month"
+            android:dialogTitle="Title"
+            android:dialogMessage="Message"
+            android:defaultValue="4" />
+        <EditTextPreference
             android:key="pref_key_sms_delete_limit"
             android:dependency="pref_key_auto_delete"
             android:summary=""
-            android:title="Second"/>
+            android:title="Month"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="2"

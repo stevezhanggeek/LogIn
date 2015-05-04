@@ -64,6 +64,7 @@ public class CalendarViewMood extends View {
         paint.setTextSize(textSize);
         int hour_vertical_interval = 300;
         int text_width = 100;
+        int rect_height = 10;
 
         paint.setAntiAlias(true);
         for (int i = Utility.hour_start; i < Utility.hour_start + Utility.num_hour_experiment_length; i++) {
@@ -74,11 +75,17 @@ public class CalendarViewMood extends View {
         }
 
         if (m_valueList != null) {
+            int lastY = 0;
             for (ParseObject object : m_valueList) {
                 int negative_positive = object.getInt("negative_positive");
                 int low_high = object.getInt("low_high");
-                int startX_negative_positive = (negative_positive + 5) * (width - text_width) / 20;
-                int startX_low_high = (width + text_width)/2 + (low_high + 5) * (width - text_width) / 20;
+                //int startX_negative_positive = (negative_positive + 5) * (width - text_width) / 20;
+                //int startX_low_high = (width + text_width)/2 + (low_high + 5) * (width - text_width) / 20;
+
+                int startX_negative_positive = 0;
+                int endX_negative_positive = startX_negative_positive + (negative_positive + 6) * (width - text_width) / 20;
+                int startX_low_high = (width + text_width)/2;
+                int endX_low_high = startX_low_high + (low_high + 6) * (width - text_width) / 20;;
 
                 Date time = object.getDate("time");
                 Calendar cal = Calendar.getInstance();
@@ -92,12 +99,17 @@ public class CalendarViewMood extends View {
                     int minute = cal.get(Calendar.MINUTE);
 
                     int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
+                    // We make sure the value list is ascending based on create time
+                    if (startY < lastY + rect_height) {
+                        startY = lastY + rect_height;
+                    }
                     paint.setColor(Utility.convertMoodValueToColor(negative_positive));
-                    RectF negative_positive_rect = new RectF(startX_negative_positive, startY, startX_negative_positive + (width - text_width) / 20, startY + 20);
-                    canvas.drawRoundRect(negative_positive_rect, 15, 15, paint);
+                    RectF negative_positive_rect = new RectF(startX_negative_positive, startY, endX_negative_positive, startY + rect_height);
+                    canvas.drawRect(negative_positive_rect, paint);
                     paint.setColor(Utility.convertMoodValueToColor(low_high));
-                    RectF low_high_rect = new RectF(startX_low_high, startY, startX_low_high + (width - text_width) / 20, startY + 20);
-                    canvas.drawRoundRect(low_high_rect, 15, 15, paint);
+                    RectF low_high_rect = new RectF(startX_low_high, startY, endX_low_high, startY + rect_height);
+                    canvas.drawRect(low_high_rect, paint);
+                    lastY = startY;
                 }
             }
         }

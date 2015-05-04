@@ -28,4 +28,36 @@
         <item>@drawable/lock</item>
         <item>@drawable/grid_icon</item>
     </array>
+    <array name="targets_sleepiness_input">
+        <item>@drawable/level_1</item>
+        <item>@drawable/level_2</item>
+        <item>@drawable/level_3</item>
+        <item>@drawable/level_4</item>
+        <item>@drawable/level_5</item>
+        <item>@drawable/level_6</item>
+        <item>@drawable/level_7</item>
+    </array>
+    <array name="targets_depression_input">
+        <item>@drawable/level_1</item>
+        <item>@drawable/level_2</item>
+        <item>@drawable/level_3</item>
+        <item>@drawable/level_4</item>
+        <item>@drawable/level_5</item>
+    </array>
+    <array name="targets_mood_input">
+        <item>@drawable/lock</item>
+        <item>@drawable/grid_icon</item>
+    </array>
+
+    <string-array name="listArray">
+        <item>Sleepiness</item>
+        <item>Depression</item>
+        <item>Mood</item>
+    </string-array>
+
+    <string-array name="listValues">
+        <item>Sleepiness</item>
+        <item>Depression</item>
+        <item>Mood</item>
+    </string-array>
 </resources>
