@@ -22,12 +22,13 @@ public class Utility extends Activity {
     private static String name_datastore = "Logs_";
 
     public static String LogInType = "Depression";
-    public static final int num_days_experiment_length = 17;
+    public static final int num_days_experiment_length = 18;
     public static final int year_start = 2015;
-    public static final int month_start = 3; // start from 0
-    public static final int day_start = 21;
-    public static final int hour_start = 10;
+    public static int month_start = 3; // start from 0
+    public static int day_start = 21;
+    public static int hour_start = 10;
     public static final int num_hour_experiment_length = 14;
+    public static int hour_rate = 22;
 
     public static List<ParseObject> m_valueList;
 

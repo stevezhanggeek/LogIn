@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <PreferenceCategory
-        android:title="1"
+        android:title="The setting below are set by researcher, please do not change. Thanks!"
         android:key="pref_key_storage_settings">
         <ListPreference
             android:key="pref_key_login_type"
@@ -12,35 +12,30 @@
             android:defaultValue="Sleepiness"
             android:entries="@array/listArray"
             android:entryValues="@array/listValues"/>
-        <Preference
-            android:key="btnDateFilter"
-            android:summary="Reschedule using current setting"
-            android:title="Reschedule" />
         <EditTextPreference
             android:key="pref_key_start_month"
             android:title="Start Month"
             android:dialogTitle="Title"
             android:dialogMessage="Message"
-            android:defaultValue="4" />
+            android:defaultValue="5" />
         <EditTextPreference
-            android:key="pref_key_sms_delete_limit"
-            android:dependency="pref_key_auto_delete"
-            android:summary=""
-            android:title="Month"/>
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:title="2"
-        android:key="pref_key_storage_settings">
-        <CheckBoxPreference
-            android:key="pref_key_auto_delete"
-            android:summary=""
-            android:title="First"
-            android:defaultValue="false"/>
-        <Preference
-            android:key="pref_key_sms_delete_limit"
-            android:dependency="pref_key_auto_delete"
-            android:summary=""
-            android:title="Second"/>
+            android:key="pref_key_start_day"
+            android:title="Start Day"
+            android:dialogTitle="Title"
+            android:dialogMessage="Message"
+            android:defaultValue="5" />
+        <EditTextPreference
+            android:key="pref_key_start_hour"
+            android:title="Start Hour"
+            android:dialogTitle="Title"
+            android:dialogMessage="Message"
+            android:defaultValue="9" />
+        <EditTextPreference
+            android:key="pref_key_rate_hour"
+            android:title="Rate Hour"
+            android:dialogTitle="Title"
+            android:dialogMessage="Message"
+            android:defaultValue="22" />
     </PreferenceCategory>
 
 </PreferenceScreen>

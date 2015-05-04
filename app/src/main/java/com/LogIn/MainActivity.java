@@ -25,7 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -87,7 +87,15 @@ public class MainActivity extends Activity {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String login_type = SP.getString("pref_key_login_type", "");
         Utility.LogInType = login_type;
-        System.out.println(Utility.LogInType);
+
+        String start_month = SP.getString("pref_key_start_month", "1");
+        String start_day = SP.getString("pref_key_start_day", "1");
+        String start_hour = SP.getString("pref_key_start_hour", "1");
+        String rate_hour = SP.getString("pref_key_rate_hour", "22");
+        Utility.month_start = Integer.parseInt(start_month) - 1;
+        Utility.day_start = Integer.parseInt(start_day);
+        Utility.hour_start = Integer.parseInt(start_hour);
+        Utility.hour_rate = Integer.parseInt(rate_hour);
 
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);
