@@ -20,7 +20,6 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
         switch (am.getRingerMode()) {
             case AudioManager.RINGER_MODE_SILENT:
@@ -33,9 +32,6 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                 Utility.notification_mode = "Normal mode";
                 break;
         }
-        System.out.println(Utility.notification_mode);
-
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
@@ -58,7 +54,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.glow_dot)
                         .setContentTitle("It's time to LogIn!")
-                        .setSound(soundUri)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                         .setContentText(text_content)
                         .setContentIntent(resultPendingIntent)
                         .setAutoCancel(true);
