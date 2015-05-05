@@ -12,8 +12,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_viz"
         android:fontFamily="sans-serif"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
 

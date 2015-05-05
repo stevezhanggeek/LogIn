@@ -60,4 +60,24 @@
         <item>Depression</item>
         <item>Mood</item>
     </string-array>
+
+    <string-array name="list_condition_description">
+        <item>Original Lockscreen,\n No Notification</item>
+        <item>Original Lockscreen,\n Notification withOUT Sound</item>
+        <item>Original Lockscreen,\n Notification with Sound</item>
+        <item>LogIn Lockscreen,\n No Notification</item>
+        <item>LogIn Lockscreen,\n Notification withOUT Sound</item>
+        <item>LogIn Lockscreen,\n Notification with Sound</item>
+    </string-array>
+
+    <string-array name="list_condition_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+
 </resources>

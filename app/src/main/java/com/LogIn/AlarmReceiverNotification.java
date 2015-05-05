@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -18,6 +19,22 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
   
     @Override
     public void onReceive(Context context, Intent intent) {
+        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+        switch (am.getRingerMode()) {
+            case AudioManager.RINGER_MODE_SILENT:
+                Utility.notification_mode = "Silent mode";
+                break;
+            case AudioManager.RINGER_MODE_VIBRATE:
+                Utility.notification_mode = "Vibrate mode";
+                break;
+            case AudioManager.RINGER_MODE_NORMAL:
+                Utility.notification_mode = "Normal mode";
+                break;
+        }
+        System.out.println(Utility.notification_mode);
+
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         PendingIntent resultPendingIntent =
@@ -28,13 +45,13 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
 
-        String text_content;
+        String text_content = "";
         if (Utility.LogInType.equals("Sleepiness")) {
-            text_content = "Click to journal your current Sleepiness.";
+            text_content = "Click to journal Sleepiness.";
         } else if (Utility.LogInType.equals("Depression")) {
-            text_content = "Click to journal your current Accomplishment/Pleasure.";
+            text_content = "Click to journal Pleasure/Accomplishment.";
         } else {
-            text_content = "Click to journal your current Mood.";
+            text_content = "Click to journal Mood.";
         }
 
         NotificationCompat.Builder mBuilder =
@@ -44,11 +61,6 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                         .setSound(soundUri)
                         .setContentText(text_content)
                         .setContentIntent(resultPendingIntent)
-                        .addAction(0, "1", resultPendingIntent)
-                        .addAction(0, "2", resultPendingIntent)
-                        .addAction(0, "3", resultPendingIntent)
-                        .addAction(0, "4", resultPendingIntent)
-                        .addAction(0, "5", resultPendingIntent)
                         .setAutoCancel(true);
 
         // Sets an ID for the notification, easy to remove then

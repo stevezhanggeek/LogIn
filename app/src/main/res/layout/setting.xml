@@ -3,6 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <PreferenceCategory
+        android:title="Personal Preference"
+        android:key="pref_key_storage_settings">
+        <ListPreference
+            android:key="pref_key_login_condition"
+            android:summary=""
+            android:title="LogIn Condition In The Day Off"
+            android:defaultValue="1"
+            android:entries="@array/list_condition_description"
+            android:entryValues="@array/list_condition_value"/>
+    </PreferenceCategory>
+    <PreferenceCategory
         android:title="The setting below are set by researcher, please do not change. Thanks!"
         android:key="pref_key_storage_settings">
         <ListPreference
