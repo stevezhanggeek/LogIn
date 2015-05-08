@@ -26,7 +26,7 @@ public class Utility extends Activity {
     public static final int year_start = 2015;
     public static int month_start = 3; // start from 0
     public static int day_start = 21;
-    public static int hour_start = 10;
+    public static int hour_start = 14;
     public static final int num_hour_experiment_length = 14;
     public static int hour_rate = 22;
     public static int condition = 1;

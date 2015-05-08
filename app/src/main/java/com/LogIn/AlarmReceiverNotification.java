@@ -19,6 +19,14 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
   
     @Override
     public void onReceive(Context context, Intent intent) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        System.out.println(Utility.hour_start);
+        if (hour < Utility.hour_start || hour >= Math.min(Utility.hour_start + Utility.num_hour_experiment_length, 23)) {
+            return;
+        }
+
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         switch (am.getRingerMode()) {
@@ -41,7 +49,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
 
-        String text_content = "";
+        String text_content;
         if (Utility.LogInType.equals("Sleepiness")) {
             text_content = "Click to journal Sleepiness.";
         } else if (Utility.LogInType.equals("Depression")) {
@@ -72,8 +80,14 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Utility.hour_start);
-        calendar.set(Calendar.MINUTE, 00);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        if (minute > 30) {
+            calendar.set(Calendar.HOUR_OF_DAY, hour + 1);
+            calendar.set(Calendar.MINUTE, 00);
+        } else {
+            calendar.set(Calendar.MINUTE, 30);
+        }
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);

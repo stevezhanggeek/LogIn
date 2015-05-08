@@ -84,14 +84,10 @@ public class MainActivity extends Activity {
         String login_type = SP.getString("pref_key_login_type", "");
         Utility.LogInType = login_type;
 
-        String start_month = SP.getString("pref_key_start_month", "1");
-        String start_day = SP.getString("pref_key_start_day", "1");
-        String start_hour = SP.getString("pref_key_start_hour", "1");
-        String rate_hour = SP.getString("pref_key_rate_hour", "22");
-        Utility.month_start = Integer.parseInt(start_month) - 1;
-        Utility.day_start = Integer.parseInt(start_day);
-        Utility.hour_start = Integer.parseInt(start_hour);
-        Utility.hour_rate = Integer.parseInt(rate_hour);
+        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
+        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "5"));
+        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
+        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
 
         AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
         alarm_rating.setRatingAlarm(this);
