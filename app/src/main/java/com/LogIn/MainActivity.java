@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onTrigger(View v, int target) {
-                    Utility.sleepinessWriteToParse(target - 2);
+                    Utility.sleepinessWriteToParse("app", target - 2);
                     glowPad.reset(true);
                     glowPad.setVisibility(View.VISIBLE);
                     openVisualization();
@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
                     if (glowPad.mhandle == 0) {
                         type = "Pleasure";
                     }
-                    Utility.depressionWriteToParse(type, target - 1);
+                    Utility.depressionWriteToParse("app", type, target - 1);
                     glowPad.reset(true);
                     glowPad.setVisibility(View.VISIBLE);
                     openVisualization();
@@ -236,7 +236,7 @@ public class MainActivity extends Activity {
                 public void onReleased(View v, int handle) {
                     txt.setText("Mood");
                     if (grid_triggered) {
-                        Utility.moodWriteToParse(saved_value_negative_positive, saved_value_low_high);
+                        Utility.moodWriteToParse("app", saved_value_negative_positive, saved_value_low_high);
                         moodGrid.setVisibility(View.INVISIBLE);
                     }
                 }

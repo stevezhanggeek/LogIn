@@ -75,7 +75,7 @@ public class LockscreenMood extends Lockscreen {
             @Override
             public void onReleased(View v, int handle) {
                 if (grid_triggered) {
-                    Utility.moodWriteToParse(saved_value_negative_positive, saved_value_low_high);
+                    Utility.moodWriteToParse("lockscreen", saved_value_negative_positive, saved_value_low_high);
                     moodGrid.setVisibility(View.INVISIBLE);
                     whiteBackground.setVisibility(View.INVISIBLE);
                     finish();

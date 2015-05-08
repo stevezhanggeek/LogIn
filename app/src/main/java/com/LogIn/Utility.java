@@ -52,18 +52,20 @@ public class Utility extends Activity {
         name_datastore = name_datastore + deviceID;
     }
 
-    public static void sleepinessWriteToParse(int value) {
+    public static void sleepinessWriteToParse(String input_source, int value) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
+        parseObj.put("input_source", input_source);
         parseObj.put("sleepiness_value", value);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();
     }
 
-    public static void depressionWriteToParse(String type, int value) {
+    public static void depressionWriteToParse(String input_source, String type, int value) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
+        parseObj.put("input_source", input_source);
         parseObj.put("depression_type", type);
         parseObj.put("depression_value", value);
         parseObj.saveInBackground();
@@ -71,9 +73,10 @@ public class Utility extends Activity {
         parseObj.saveEventually();
     }
 
-    public static void moodWriteToParse(int negative_positive, int low_high) {
+    public static void moodWriteToParse(String input_source, int negative_positive, int low_high) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
+        parseObj.put("input_source", input_source);
         parseObj.put("mood_negative_positive", negative_positive);
         parseObj.put("mood_low_high", low_high);
         parseObj.saveInBackground();

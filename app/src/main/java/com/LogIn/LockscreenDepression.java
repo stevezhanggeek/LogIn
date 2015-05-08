@@ -42,7 +42,7 @@ public class LockscreenDepression extends Lockscreen {
                 if (glowPad.mhandle == 0) {
                     type = "Pleasure";
                 }
-                Utility.depressionWriteToParse(type, target - 1);
+                Utility.depressionWriteToParse("lockscreen", type, target - 1);
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();

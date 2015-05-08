@@ -38,7 +38,7 @@ public class LockscreenSleepiness extends Lockscreen {
 
             @Override
             public void onTrigger(View v, int target) {
-                Utility.sleepinessWriteToParse(target - 2);
+                Utility.sleepinessWriteToParse("lockscreen", target - 2);
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();
