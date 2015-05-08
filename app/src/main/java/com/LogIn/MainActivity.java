@@ -72,6 +72,15 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String launchFrom = getIntent().getStringExtra("launchFrom");
+        System.out.println(launchFrom);
+        if (launchFrom != null && launchFrom.equals("notification")) {
+            Utility.notificationWriteToParse("touch");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +88,6 @@ public class MainActivity extends Activity {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getActionBar().setDisplayShowTitleEnabled(false);
         startService(new Intent(this, LockscreenService.class));
-
-        String launchFrom = getIntent().getStringExtra("launchFrom");
-        if (launchFrom != null && launchFrom.equals("notification")) {
-            Utility.notificationWriteToParse("touch");
-        }
 
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String login_type = SP.getString("pref_key_login_type", "");
@@ -243,6 +247,8 @@ public class MainActivity extends Activity {
                     if (grid_triggered) {
                         Utility.moodWriteToParse("app", saved_value_negative_positive, saved_value_low_high);
                         moodGrid.setVisibility(View.INVISIBLE);
+                        glowPad.reset(true);
+                        glowPad.setVisibility(View.VISIBLE);
                         openVisualization();
                         grid_triggered = false;
                     }
