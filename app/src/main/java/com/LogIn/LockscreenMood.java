@@ -78,12 +78,14 @@ public class LockscreenMood extends Lockscreen {
                     Utility.moodWriteToParse("lockscreen", saved_value_negative_positive, saved_value_low_high);
                     moodGrid.setVisibility(View.INVISIBLE);
                     whiteBackground.setVisibility(View.INVISIBLE);
+                    grid_triggered = false;
                     finish();
                 }
             }
 
             @Override
             public void onTrigger(View v, int target) {
+                if (target == 0) Utility.moodWriteToParse("app", -9999, -9999);
                 glowPad.reset(true);
                 v.setVisibility(View.GONE);
                 finish();

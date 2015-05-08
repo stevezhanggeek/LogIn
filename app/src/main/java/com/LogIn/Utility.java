@@ -84,10 +84,10 @@ public class Utility extends Activity {
         parseObj.saveEventually();
     }
 
-    public static void notificationWriteToParse() {
+    public static void notificationWriteToParse(String action) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
-        parseObj.put("notification_triggered", "Yep");
+        parseObj.put("notification_triggered", action);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();

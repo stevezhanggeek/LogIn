@@ -79,37 +79,37 @@ public class CalendarViewMood extends View {
             for (ParseObject object : m_valueList) {
                 int negative_positive = object.getInt("mood_negative_positive");
                 int low_high = object.getInt("mood_low_high");
-                //int startX_negative_positive = (negative_positive + 5) * (width - text_width) / 20;
-                //int startX_low_high = (width + text_width)/2 + (low_high + 5) * (width - text_width) / 20;
+                if (negative_positive != -9999) {
+                    int startX_negative_positive = 0;
+                    int endX_negative_positive = startX_negative_positive + (negative_positive + 6) * (width - text_width) / 20;
+                    int startX_low_high = (width + text_width) / 2;
+                    int endX_low_high = startX_low_high + (low_high + 6) * (width - text_width) / 20;
+                    ;
 
-                int startX_negative_positive = 0;
-                int endX_negative_positive = startX_negative_positive + (negative_positive + 6) * (width - text_width) / 20;
-                int startX_low_high = (width + text_width)/2;
-                int endX_low_high = startX_low_high + (low_high + 6) * (width - text_width) / 20;;
+                    Date time = object.getDate("time");
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(time);
+                    cal.add(Calendar.DATE, -index_day);
+                    int year = cal.get(Calendar.YEAR);
+                    int month = cal.get(Calendar.MONTH);
+                    int day = cal.get(Calendar.DAY_OF_MONTH);
+                    if (year == Utility.year_start && month == Utility.month_start && day == Utility.day_start) {
+                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        int minute = cal.get(Calendar.MINUTE);
 
-                Date time = object.getDate("time");
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(time);
-                cal.add(Calendar.DATE, -index_day);
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                if (year == Utility.year_start && month == Utility.month_start && day == Utility.day_start) {
-                    int hour = cal.get(Calendar.HOUR_OF_DAY);
-                    int minute = cal.get(Calendar.MINUTE);
-
-                    int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
-                    // We make sure the value list is ascending based on create time
-                    if (startY < lastY + rect_height) {
-                        startY = lastY + rect_height;
+                        int startY = hour_vertical_interval + (int) ((hour - Utility.hour_start + (double) minute / 60) * hour_vertical_interval);
+                        // We make sure the value list is ascending based on create time
+                        if (startY < lastY + rect_height) {
+                            startY = lastY + rect_height;
+                        }
+                        paint.setColor(Utility.convertMoodValueToColor(negative_positive));
+                        RectF negative_positive_rect = new RectF(startX_negative_positive, startY, endX_negative_positive, startY + rect_height);
+                        canvas.drawRect(negative_positive_rect, paint);
+                        paint.setColor(Utility.convertMoodValueToColor(low_high));
+                        RectF low_high_rect = new RectF(startX_low_high, startY, endX_low_high, startY + rect_height);
+                        canvas.drawRect(low_high_rect, paint);
+                        lastY = startY;
                     }
-                    paint.setColor(Utility.convertMoodValueToColor(negative_positive));
-                    RectF negative_positive_rect = new RectF(startX_negative_positive, startY, endX_negative_positive, startY + rect_height);
-                    canvas.drawRect(negative_positive_rect, paint);
-                    paint.setColor(Utility.convertMoodValueToColor(low_high));
-                    RectF low_high_rect = new RectF(startX_low_high, startY, endX_low_high, startY + rect_height);
-                    canvas.drawRect(low_high_rect, paint);
-                    lastY = startY;
                 }
             }
         }

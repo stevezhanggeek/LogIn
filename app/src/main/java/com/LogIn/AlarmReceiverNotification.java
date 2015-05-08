@@ -45,7 +45,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                 PendingIntent.getActivity(
                         context,
                         0,
-                        new Intent(context, MainActivity.class),
+                        new Intent(context, MainActivity.class).putExtra("launchFrom", "notification"),
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
 
@@ -72,7 +72,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-        Utility.notificationWriteToParse();
+        Utility.notificationWriteToParse("Show");
     }
 
     public void setNotificationAlarm(Context context) {
