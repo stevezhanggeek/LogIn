@@ -71,6 +71,8 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
         int mNotificationId = 715;
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+        Utility.notificationWriteToParse();
     }
 
     public void setNotificationAlarm(Context context) {

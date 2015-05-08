@@ -84,6 +84,15 @@ public class Utility extends Activity {
         parseObj.saveEventually();
     }
 
+    public static void notificationWriteToParse() {
+        ParseObject parseObj = new ParseObject(name_datastore);
+        parseObj.put("time", new Date());
+        parseObj.put("notification_triggered", "Yep");
+        parseObj.saveInBackground();
+        parseObj.pinInBackground();
+        parseObj.saveEventually();
+    }
+
     public static void rateWriteToParse(int rate) {
         ParseObject parseObj = new ParseObject("Rating");
         parseObj.put("time", new Date());
