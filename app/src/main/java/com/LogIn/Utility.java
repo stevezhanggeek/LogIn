@@ -55,27 +55,30 @@ public class Utility extends Activity {
     public static void sleepinessWriteToParse(int value) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
-        parseObj.put("value", value);
+        parseObj.put("sleepiness_value", value);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
+        parseObj.saveEventually();
     }
 
     public static void depressionWriteToParse(String type, int value) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
-        parseObj.put("type", type);
-        parseObj.put("value", value);
+        parseObj.put("depression_type", type);
+        parseObj.put("depression_value", value);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
+        parseObj.saveEventually();
     }
 
     public static void moodWriteToParse(int negative_positive, int low_high) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
-        parseObj.put("negative_positive", negative_positive);
-        parseObj.put("low_high", low_high);
+        parseObj.put("mood_negative_positive", negative_positive);
+        parseObj.put("mood_low_high", low_high);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
+        parseObj.saveEventually();
     }
 
     public static void rateWriteToParse(int rate) {
@@ -85,6 +88,7 @@ public class Utility extends Activity {
         parseObj.put("rate", rate);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
+        parseObj.saveEventually();
     }
 
     public static List<ParseObject> getDataFromParse() {

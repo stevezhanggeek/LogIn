@@ -77,8 +77,8 @@ public class CalendarViewMood extends View {
         if (m_valueList != null) {
             int lastY = 0;
             for (ParseObject object : m_valueList) {
-                int negative_positive = object.getInt("negative_positive");
-                int low_high = object.getInt("low_high");
+                int negative_positive = object.getInt("mood_negative_positive");
+                int low_high = object.getInt("mood_low_high");
                 //int startX_negative_positive = (negative_positive + 5) * (width - text_width) / 20;
                 //int startX_low_high = (width + text_width)/2 + (low_high + 5) * (width - text_width) / 20;
 

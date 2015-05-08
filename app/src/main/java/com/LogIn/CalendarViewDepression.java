@@ -77,8 +77,8 @@ public class CalendarViewDepression extends View {
         if (m_valueList != null) {
             int lastY = 0;
             for (ParseObject object : m_valueList) {
-                String type = object.getString("type");
-                int value = object.getInt("value");
+                String type = object.getString("depression_type");
+                int value = object.getInt("depression_value");
                 int startX = 0;
                 if (type.equals("Pleasure")) {
                     startX += (width + text_width) / 2;

@@ -77,7 +77,7 @@ public class CalendarViewSleepiness extends View {
         if (m_valueList != null) {
             int lastY = 0;
             for (ParseObject object : m_valueList) {
-                int value = object.getInt("value");
+                int value = object.getInt("sleepiness_value");
                 int startX = text_width;
                 int endX = startX + value * (width - text_width) / 7;
 
