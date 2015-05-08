@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
             setContentView(R.layout.input_sleepiness);
 
             final TextView txt = (TextView) findViewById(R.id.textView);
-            txt.setText("Please Log Your Sleepiness");
+            txt.setText("Sleepiness");
 
             final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
             glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onReleased(View v, int handle) {
-                    txt.setText("Please Log Your Sleepiness");
+                    txt.setText("Sleepiness");
                 }
 
                 @Override
@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
             setContentView(R.layout.input_depression);
 
             final TextView txt = (TextView) findViewById(R.id.textView);
-            txt.setText("Please Log Your Pleasure/Accomplishment");
+            txt.setText("Pleasure/Accomplishment");
 
             final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
             glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
@@ -152,7 +152,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onReleased(View v, int handle) {
-                    txt.setText("Please Log Your Pleasure/Accomplishment");
+                    txt.setText("Pleasure/Accomplishment");
                 }
 
                 @Override
@@ -192,7 +192,7 @@ public class MainActivity extends Activity {
             setContentView(R.layout.input_mood);
 
             final TextView txt = (TextView) findViewById(R.id.textView);
-            txt.setText("Please Log Your Mood");
+            txt.setText("Mood");
 
             final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
             final ImageView moodGrid = (ImageView) findViewById(R.id.mood_grid);
@@ -238,7 +238,7 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onReleased(View v, int handle) {
-                    txt.setText("Please Log Your Mood");
+                    txt.setText("Mood");
                     if (grid_triggered) {
                         Utility.moodWriteToParse(saved_value_negative_positive, saved_value_low_high);
                         moodGrid.setVisibility(View.INVISIBLE);

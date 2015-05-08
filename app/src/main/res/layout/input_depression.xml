@@ -24,7 +24,7 @@
         android:layout_height="fill_parent"
         android:visibility="visible"
 
-        app:targetDrawables="@array/targets_depression"
+        app:targetDrawables="@array/targets_depression_input"
         app:handleDrawable="@drawable/handle_depression"
         app:innerRadius="@dimen/glowpadview_inner_radius"
         app:outerRadius="@dimen/glowpadview_target_placement_radius"
