@@ -81,10 +81,25 @@ public class CalendarViewMood extends View {
                 System.out.println(negative_positive);
                 int low_high = object.getInt("mood_low_high");
                 if (negative_positive != -9999 && negative_positive != 0) {
-                    int startX_negative_positive = 0;
-                    int endX_negative_positive = startX_negative_positive + (negative_positive + 6) * (width - text_width) / 20;
-                    int startX_low_high = (width + text_width) / 2;
-                    int endX_low_high = startX_low_high + (low_high + 6) * (width - text_width) / 20;
+                    int startX_negative_positive;
+                    int endX_negative_positive;
+                    if (negative_positive < 0) {
+                        endX_negative_positive = (width - text_width) / 4;
+                        startX_negative_positive = endX_negative_positive + negative_positive * (width - text_width) / 20;
+                    } else {
+                        startX_negative_positive = (width - text_width) / 4;
+                        endX_negative_positive = startX_negative_positive + negative_positive * (width - text_width) / 20;
+                    }
+
+                    int startX_low_high;
+                    int endX_low_high;
+                    if (low_high < 0) {
+                        endX_low_high = (width + text_width) / 2 + (width - text_width) / 4;
+                        startX_low_high = endX_low_high + low_high * (width - text_width) / 20;
+                    } else {
+                        startX_low_high = (width + text_width) / 2 + (width - text_width) / 4;
+                        endX_low_high = startX_low_high + low_high * (width - text_width) / 20;
+                    }
 
                     Date time = object.getDate("time");
                     Calendar cal = Calendar.getInstance();

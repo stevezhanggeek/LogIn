@@ -49,7 +49,7 @@ public class LockscreenMood extends Lockscreen {
                     }
 
                     String low_high = "Low";
-                    saved_value_low_high = Math.abs((int)((double)(e.getY() - moodGrid.getHeight() / 2) / grid_size)) + 1;
+                    saved_value_low_high = -(Math.abs((int)((double)(e.getY() - moodGrid.getHeight() / 2) / grid_size)) + 1);
                     if (e.getY() < moodGrid.getHeight() / 2) {
                         low_high = "High";
                         saved_value_low_high = -saved_value_low_high;

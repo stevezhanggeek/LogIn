@@ -171,7 +171,7 @@ public class Utility extends Activity {
     }
 
     public static int convertMoodValueToColor(int value) {
-        int diff = 255/9;
+        int diff = 255/10;
         return Color.rgb(255/2 - value*diff, 255/2 + value*diff, 0);
     }
 
