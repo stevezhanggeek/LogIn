@@ -57,6 +57,17 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void initSettings() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String login_type = SP.getString("pref_key_login_type", "");
+        Utility.LogInType = login_type;
+
+        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
+        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "5"));
+        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
+        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
@@ -73,30 +84,13 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        String launchFrom = getIntent().getStringExtra("launchFrom");
-        System.out.println(launchFrom);
-        if (launchFrom != null && launchFrom.equals("notification")) {
-            Utility.notificationWriteToParse("touch");
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getActionBar().setDisplayShowTitleEnabled(false);
         startService(new Intent(this, LockscreenService.class));
 
-        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String login_type = SP.getString("pref_key_login_type", "");
-        Utility.LogInType = login_type;
-
-        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
-        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "5"));
-        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
-        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
+        initSettings();
 
         AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
         alarm_rating.setRatingAlarm(this);

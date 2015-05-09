@@ -1,17 +1,9 @@
 package com.LogIn;
 
 import android.app.Activity;
-import android.app.WallpaperManager;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import net.frakbot.glowpadbackport.GlowPadView;
 
 public class Lockscreen extends Activity {
     @Override

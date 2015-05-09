@@ -29,6 +29,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".MainActivityLaunchByNotification">
+        </activity>
+
         <!-- A child of the main activity -->
         <activity
             android:name=".Setting"
