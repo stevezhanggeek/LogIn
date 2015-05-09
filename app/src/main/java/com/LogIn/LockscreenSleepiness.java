@@ -25,15 +25,6 @@ public class LockscreenSleepiness extends Lockscreen {
         ll.setBackground(WallpaperManager.getInstance(this).getFastDrawable());
 
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
-/*
-        glowPad.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                touched = true;
-                return false;
-            }
-        });
-        */
 
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override

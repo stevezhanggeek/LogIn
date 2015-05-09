@@ -15,6 +15,8 @@ public class lockScreenReceiver extends BroadcastReceiver  {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (!Utility.needLockscreen()) return;
+
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             wasScreenOn=false;
             if (Utility.LogInType.equals("Sleepiness")) {

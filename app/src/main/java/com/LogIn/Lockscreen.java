@@ -22,16 +22,5 @@ public class Lockscreen extends Activity {
         if(getIntent()!=null&&getIntent().hasExtra("kill")&&getIntent().getExtras().getInt("kill")==1){
             finish();
         }
-/* //Problem is, the activity starts when user turn off the screen...need know when turn on the screen
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!touched) {
-                    System.out.println("Dim");
-                }
-            }
-        }, 10000);
-*/
     }
 }

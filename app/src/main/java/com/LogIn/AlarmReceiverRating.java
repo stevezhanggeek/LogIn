@@ -16,14 +16,6 @@ public class AlarmReceiverRating extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        if (hour != Utility.hour_rate || (hour == Utility.hour_rate && minute > 4)) {
-            return;
-        }
-
         Intent alarmIntent = new Intent();
         alarmIntent.setClass(context, RateAlert.class);
         alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

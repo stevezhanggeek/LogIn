@@ -70,12 +70,12 @@
     </string-array>
 
     <string-array name="list_condition_description">
-        <item>Original Lockscreen,\n No Notification</item>
-        <item>Original Lockscreen,\n Notification withOUT Sound</item>
-        <item>Original Lockscreen,\n Notification with Sound</item>
-        <item>LogIn Lockscreen,\n No Notification</item>
-        <item>LogIn Lockscreen,\n Notification withOUT Sound</item>
-        <item>LogIn Lockscreen,\n Notification with Sound</item>
+        <item>Original Lockscreen,\nNo Notification</item>
+        <item>Original Lockscreen,\nNotification without Sound</item>
+        <item>Original Lockscreen,\nNotification with Sound</item>
+        <item>LogIn Lockscreen,\nNo Notification</item>
+        <item>LogIn Lockscreen,\nNotification without Sound</item>
+        <item>LogIn Lockscreen,\nNotification with Sound</item>
     </string-array>
 
     <string-array name="list_condition_value">

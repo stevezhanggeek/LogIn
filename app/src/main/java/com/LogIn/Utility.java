@@ -3,9 +3,6 @@ package com.LogIn;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
-import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -21,18 +18,61 @@ public class Utility extends Activity {
     private static String deviceID = "";
     private static String name_datastore = "Logs_";
 
-    public static String LogInType = "Depression";
+    public static String LogInType = "Sleepiness";
     public static final int num_days_experiment_length = 18;
     public static final int year_start = 2015;
-    public static int month_start = 3; // start from 0
-    public static int day_start = 21;
-    public static int hour_start = 14;
+    public static int month_start = 4; // start from 0
+    public static int day_start = 1;
+    public static int hour_start = 9;
     public static final int num_hour_experiment_length = 12;
     public static int hour_rate = 22;
-    public static int condition = 1;
-    public static String notification_mode = "Normal Mode";
+    public static String conditions = "123456";
+    public static String condition_dayoff = "1";
+    // Condition:
+    // 1: No lockscreen, No notification
+    // 2: No lockscreen, Notification no sound
+    // 3: No lockscreen, Notification has sound
+    // 4: Has lockscreen, No notification
+    // 5: Has lockscreen, Notification no sound
+    // 6: Has lockscreen, Notification has sound
 
     public static List<ParseObject> m_valueList;
+
+    public static char getCondition() {
+        int i = getDaysDiff();
+        char condition;
+        if (i < 0) i = 0;
+        if (i%3 == 2 || i >= num_days_experiment_length) {
+            condition = condition_dayoff.charAt(0);
+        } else {
+            condition = conditions.charAt(i/3);
+        }
+        return condition;
+    }
+
+    public static boolean needLockscreen() {
+        char condition = getCondition();
+        if (condition == '4' || condition == '5' || condition == '6') {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean needNotification() {
+        char condition = getCondition();
+        if (condition == '2' || condition == '3' || condition == '5' || condition == '6') {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean needNotificationSound() {
+        char condition = getCondition();
+        if (condition == '3' || condition == '6') {
+            return true;
+        }
+        return false;
+    }
 
     public static String getUniquePsuedoID() {
         String m_szDevIDShort = "35" + (Build.BOARD.length() % 10) + (Build.BRAND.length() % 10) + (Build.CPU_ABI.length() % 10) + (Build.DEVICE.length() % 10) + (Build.MANUFACTURER.length() % 10) + (Build.MODEL.length() % 10) + (Build.PRODUCT.length() % 10);
@@ -84,10 +124,11 @@ public class Utility extends Activity {
         parseObj.saveEventually();
     }
 
-    public static void notificationWriteToParse(String action) {
+    public static void notificationWriteToParse(String action, String notification_mode) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
-        parseObj.put("notification_triggered", action);
+        parseObj.put("action", action);
+        parseObj.put("notification_mode", notification_mode);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();
@@ -98,6 +139,16 @@ public class Utility extends Activity {
         parseObj.put("time", new Date());
         parseObj.put("deviceID", deviceID);
         parseObj.put("rate", rate);
+        parseObj.saveInBackground();
+        parseObj.pinInBackground();
+        parseObj.saveEventually();
+    }
+
+    public static void settingChangedWriteToParse(String setting) {
+        ParseObject parseObj = new ParseObject("SettingChanged");
+        parseObj.put("time", new Date());
+        parseObj.put("deviceID", deviceID);
+        parseObj.put("setting", setting);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();

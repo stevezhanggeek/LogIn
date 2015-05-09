@@ -36,22 +36,13 @@ public class RateAlert extends Activity {
 
         setContentView(R.layout.rate_alert);
         final TextView txt = (TextView) findViewById(R.id.textView);
-        String description = "At ";
-        /*
-        if (Utility.LogInType.equals("Sleepiness")) {
-            description += "Sleepiness";
-        } else if (Utility.LogInType.equals("Depression")) {
-            description += "Depression";
-        } else {
-            description += "Mood";
-        }
-        */
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
+        String description = "On ";
         description += (new DateFormatSymbols().getMonths()[month] + " " + Integer.toString(day));
-
-        description += ", please rate intrusiveness of LogIn under condition 1";
+        description += "\nPlease rate intrusiveness of LogIn\nUnder condition ";
+        description += Utility.getCondition();
         txt.setText(description);
 
         final ImageView image_view = (ImageView) findViewById(R.id.imageView);

@@ -1,6 +1,7 @@
 package com.LogIn;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -23,21 +24,23 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         System.out.println(Utility.hour_start);
-        if (hour < Utility.hour_start || hour >= Math.min(Utility.hour_start + Utility.num_hour_experiment_length, 23)) {
+        if (!Utility.needNotification()
+                || hour < Utility.hour_start
+                || hour >= Math.min(Utility.hour_start + Utility.num_hour_experiment_length, 23)) {
             return;
         }
 
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-
+        String notification_mode = "";
         switch (am.getRingerMode()) {
             case AudioManager.RINGER_MODE_SILENT:
-                Utility.notification_mode = "Silent mode";
+                notification_mode = "Silent mode";
                 break;
             case AudioManager.RINGER_MODE_VIBRATE:
-                Utility.notification_mode = "Vibrate mode";
+                notification_mode = "Vibrate mode";
                 break;
             case AudioManager.RINGER_MODE_NORMAL:
-                Utility.notification_mode = "Normal mode";
+                notification_mode = "Normal mode";
                 break;
         }
 
@@ -62,17 +65,20 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.glow_dot)
                         .setContentTitle("It's time to LogIn!")
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                         .setContentText(text_content)
                         .setContentIntent(resultPendingIntent)
                         .setAutoCancel(true);
+
+        if (Utility.needNotificationSound()) {
+            mBuilder.setDefaults(Notification.DEFAULT_ALL);
+        }
 
         // Sets an ID for the notification, easy to remove then
         int mNotificationId = 715;
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-        Utility.notificationWriteToParse("Show");
+        Utility.notificationWriteToParse("Show", notification_mode);
     }
 
     public void setNotificationAlarm(Context context) {
