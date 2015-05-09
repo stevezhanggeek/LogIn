@@ -67,7 +67,7 @@ public class CalendarViewDepression extends View {
         int rect_height = 10;
 
         paint.setAntiAlias(true);
-        for (int i = Utility.hour_start; i < Utility.hour_start + Utility.num_hour_experiment_length; i++) {
+        for (int i = Utility.hour_start; i <= Utility.hour_start + Utility.num_hour_experiment_length; i++) {
             int y = (i - Utility.hour_start + 1) * hour_vertical_interval;
             canvas.drawText(i + ":00", 10 + (width - text_width)/2, y + textSize / 2, paint);
             canvas.drawLine(0, y, (width - text_width)/2, y, paint);

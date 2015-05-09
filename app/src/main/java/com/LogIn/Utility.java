@@ -27,7 +27,7 @@ public class Utility extends Activity {
     public static int month_start = 3; // start from 0
     public static int day_start = 21;
     public static int hour_start = 14;
-    public static final int num_hour_experiment_length = 14;
+    public static final int num_hour_experiment_length = 12;
     public static int hour_rate = 22;
     public static int condition = 1;
     public static String notification_mode = "Normal Mode";
@@ -106,7 +106,7 @@ public class Utility extends Activity {
     public static List<ParseObject> getDataFromParse() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(name_datastore);
         query.fromLocalDatastore();
-        query.addAscendingOrder("createdAt");
+        query.addAscendingOrder("time");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> valueList, ParseException e) {
                 if (e == null) {
