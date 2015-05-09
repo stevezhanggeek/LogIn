@@ -5,6 +5,7 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -24,6 +25,15 @@ public class LockscreenSleepiness extends Lockscreen {
         ll.setBackground(WallpaperManager.getInstance(this).getFastDrawable());
 
         final GlowPadView glowPad = (GlowPadView) findViewById(R.id.incomingCallWidget);
+/*
+        glowPad.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                touched = true;
+                return false;
+            }
+        });
+        */
 
         glowPad.setOnTriggerListener(new GlowPadView.OnTriggerListener() {
             @Override

@@ -82,7 +82,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-/*
+
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         if (minute > 30) {
@@ -91,7 +91,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
         } else {
             calendar.set(Calendar.MINUTE, 30);
         }
-*/
+
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
     }
