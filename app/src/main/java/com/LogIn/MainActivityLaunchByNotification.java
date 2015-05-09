@@ -8,7 +8,7 @@ public class MainActivityLaunchByNotification extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Utility.notificationWriteToParse("LaunchMainActivity", "");
+        Utility.notificationWriteToParse("NotificationLaunchMainActivity", "");
         Intent alarmIntent = new Intent(this, MainActivity.class);
         alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(alarmIntent);

@@ -34,6 +34,7 @@ public class RateAlert extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Utility.notificationWriteToParse("RateAlertShow", "");
         setContentView(R.layout.rate_alert);
         final TextView txt = (TextView) findViewById(R.id.textView);
         Calendar cal = Calendar.getInstance();

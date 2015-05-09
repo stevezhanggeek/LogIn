@@ -5,7 +5,7 @@
         android:icon="@drawable/viz_icon"
         android:title="Data"
         android:showAsAction="ifRoom" />
-    <item android:id="@+id/space"
+    <item android:id="@+id/action_hiddensettings"
         android:title=" "
         android:showAsAction="ifRoom" />
     <item android:id="@+id/action_settings"

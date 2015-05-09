@@ -25,13 +25,6 @@ public class Setting extends PreferenceActivity implements SharedPreferences.OnS
 
         // LogIn basic setup
         Utility.condition_dayoff = SP.getString("pref_key_dayoff_condition", "1");
-        Utility.conditions = SP.getString("pref_key_conditions", "123456");
-        Utility.LogInType = SP.getString("pref_key_login_type", "Sleepiness");
-
-        // For Visualization View
-        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
-        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "1"));
-        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
 
         // Setup Rate Alert
         Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));

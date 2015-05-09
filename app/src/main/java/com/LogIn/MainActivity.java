@@ -49,6 +49,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void openHiddenSettings() {
+        Intent intent = new Intent(this, SettingHidden.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -80,6 +85,9 @@ public class MainActivity extends Activity {
                 return true;
             case R.id.action_settings:
                 openSettings();
+                return true;
+            case R.id.action_hiddensettings:
+                openHiddenSettings();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

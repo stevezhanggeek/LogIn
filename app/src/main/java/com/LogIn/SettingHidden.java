@@ -24,7 +24,6 @@ public class SettingHidden extends PreferenceActivity implements SharedPreferenc
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         // LogIn basic setup
-        Utility.condition_dayoff = SP.getString("pref_key_dayoff_condition", "1");
         Utility.conditions = SP.getString("pref_key_conditions", "123456");
         Utility.LogInType = SP.getString("pref_key_login_type", "Sleepiness");
 
@@ -32,11 +31,6 @@ public class SettingHidden extends PreferenceActivity implements SharedPreferenc
         Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
         Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "1"));
         Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
-
-        // Setup Rate Alert
-        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
-        AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
-        alarm_rating.setRatingAlarm(this);
 
         String setting = Utility.condition_dayoff + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
                 + Utility.month_start + ", " + Utility.day_start + ", " + Utility.hour_start + ", "
