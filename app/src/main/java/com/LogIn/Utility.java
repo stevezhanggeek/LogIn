@@ -1,8 +1,11 @@
 package com.LogIn;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -92,6 +95,20 @@ public class Utility extends Activity {
         name_datastore = name_datastore + deviceID;
     }
 
+    public static void initSettings(Context context) {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // LogIn basic setup
+        Utility.condition_dayoff = SP.getString("pref_key_dayoff_condition", "1");
+        Utility.conditions = SP.getString("pref_key_conditions", "123456");
+        Utility.LogInType = SP.getString("pref_key_login_type", "Sleepiness");
+
+        // For Visualization View
+        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
+        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "1"));
+        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
+    }
+
     public static void sleepinessWriteToParse(String input_source, int value) {
         ParseObject parseObj = new ParseObject(name_datastore);
         parseObj.put("time", new Date());
@@ -125,7 +142,7 @@ public class Utility extends Activity {
     }
 
     public static void notificationWriteToParse(String action, String notification_mode) {
-        ParseObject parseObj = new ParseObject(name_datastore);
+        ParseObject parseObj = new ParseObject(name_datastore+"_Notif");
         parseObj.put("time", new Date());
         parseObj.put("action", action);
         parseObj.put("notification_mode", notification_mode);
@@ -218,7 +235,7 @@ public class Utility extends Activity {
 
     public static int convertDepressionValueToColor(int value) {
         int diff = 255/4;
-        return Color.rgb((value-1)*diff, 255 - (value-1)*diff, 0);
+        return Color.rgb(255 - (value-1)*diff, (value-1)*diff, 0);
     }
 
     public static int convertMoodValueToColor(int value) {

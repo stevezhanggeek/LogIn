@@ -34,6 +34,6 @@ public class Setting extends PreferenceActivity implements SharedPreferences.OnS
         String setting = Utility.condition_dayoff + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
                 + Utility.month_start + ", " + Utility.day_start + ", " + Utility.hour_start + ", "
                 + Utility.hour_rate;
-        Utility.settingChangedWriteToParse(setting);
+        //Utility.settingChangedWriteToParse(setting);
     }
 }

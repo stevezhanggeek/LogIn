@@ -62,20 +62,6 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void initSettings() {
-        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-        // LogIn basic setup
-        Utility.condition_dayoff = SP.getString("pref_key_dayoff_condition", "1");
-        Utility.conditions = SP.getString("pref_key_conditions", "123456");
-        Utility.LogInType = SP.getString("pref_key_login_type", "Sleepiness");
-
-        // For Visualization View
-        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
-        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "1"));
-        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
@@ -101,7 +87,7 @@ public class MainActivity extends Activity {
 //        getActionBar().setDisplayShowTitleEnabled(false);
         startService(new Intent(this, LockscreenService.class));
 
-        initSettings();
+        Utility.initSettings(getBaseContext());
 
         AlarmReceiverNotification alarm_notification = new AlarmReceiverNotification();
         alarm_notification.setNotificationAlarm(this);

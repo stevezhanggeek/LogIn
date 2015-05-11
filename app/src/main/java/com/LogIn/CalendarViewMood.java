@@ -67,6 +67,12 @@ public class CalendarViewMood extends View {
         int rect_height = 10;
 
         paint.setAntiAlias(true);
+
+        paint.setColor(Color.GRAY);
+        canvas.drawLine((width - text_width) / 4, hour_vertical_interval, (width - text_width) / 4, hour_vertical_interval * (Utility.num_hour_experiment_length + 1), paint);
+        canvas.drawLine(width - (width - text_width) / 4, hour_vertical_interval, width -(width - text_width) / 4, hour_vertical_interval*(Utility.num_hour_experiment_length+1), paint);
+        paint.setColor(Color.BLACK);
+
         for (int i = Utility.hour_start; i <= Utility.hour_start + Utility.num_hour_experiment_length; i++) {
             int y = (i - Utility.hour_start + 1) * hour_vertical_interval;
             canvas.drawText(i + ":00", 10 + (width - text_width)/2, y + textSize / 2, paint);
