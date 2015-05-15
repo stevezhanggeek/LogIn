@@ -28,7 +28,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
         if (!Utility.needNotification()
                 || hour < Utility.hour_start
                 || hour >= Math.min(Utility.hour_start + Utility.num_hour_experiment_length, 23)) {
-            Utility.notificationWriteToParse("NotificationHidden", "");
+            Utility.notificationWriteToParse("NotificationHidden" + Utility.getCondition(), "");
             return;
         }
 
@@ -80,7 +80,7 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-        Utility.notificationWriteToParse("NotificationShow", notification_mode);
+        Utility.notificationWriteToParse("NotificationShow" + Utility.getCondition(), notification_mode);
     }
 
     public void setNotificationAlarm(Context context) {

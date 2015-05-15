@@ -92,6 +92,12 @@ public class MainActivity extends Activity {
         AlarmReceiverNotification alarm_notification = new AlarmReceiverNotification();
         alarm_notification.setNotificationAlarm(this);
 
+        // Setup Rate Alert
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
+        AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
+        alarm_rating.setRatingAlarm(this);
+
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);
 
