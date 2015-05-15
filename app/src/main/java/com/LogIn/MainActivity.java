@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
                     Utility.sleepinessWriteToParse("app", target - 2);
                     glowPad.reset(true);
                     glowPad.setVisibility(View.VISIBLE);
-                    openVisualization();
+                    if (target - 2 >= 1 && target - 2 <= 7) openVisualization();
                 }
 
                 @Override
@@ -164,7 +164,7 @@ public class MainActivity extends Activity {
                     Utility.depressionWriteToParse("app", type, target - 1);
                     glowPad.reset(true);
                     glowPad.setVisibility(View.VISIBLE);
-                    openVisualization();
+                    if (target - 1 >= 1 && target - 1 <= 5) openVisualization();
                 }
 
                 @Override
