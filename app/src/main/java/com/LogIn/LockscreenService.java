@@ -18,10 +18,7 @@ public class LockscreenService extends Service{
 
     @Override
     public void onCreate() {
-        KeyguardManager.KeyguardLock k1;
-        KeyguardManager km =(KeyguardManager)getSystemService(KEYGUARD_SERVICE);
-        k1= km.newKeyguardLock("IN");
-        k1.disableKeyguard();
+        Utility.setKeyguardLock(this);
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);

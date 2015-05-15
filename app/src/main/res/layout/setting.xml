@@ -8,15 +8,9 @@
         <ListPreference
             android:key="pref_key_dayoff_condition"
             android:summary=""
-            android:title="LogIn Condition In The Day Off"
+            android:title="Interface For Non-Study Days"
             android:defaultValue="1"
             android:entries="@array/list_condition_description"
             android:entryValues="@array/list_condition_value"/>
-        <EditTextPreference
-            android:key="pref_key_rate_hour"
-            android:title="Rate Hour"
-            android:dialogTitle="Title"
-            android:dialogMessage="Message"
-            android:defaultValue="22" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -95,6 +95,9 @@ public class MainActivity extends Activity {
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);
 
+            final TextView condition_text = (TextView) findViewById(R.id.textView2);
+            condition_text.setText("Condition" + String.valueOf(Utility.getCondition()));
+
             final TextView txt = (TextView) findViewById(R.id.textView);
             txt.setText("Sleepiness");
 
@@ -134,6 +137,9 @@ public class MainActivity extends Activity {
             });
         } else if (Utility.LogInType.equals("Depression")) {
             setContentView(R.layout.input_depression);
+
+            final TextView condition_text = (TextView) findViewById(R.id.textView2);
+            condition_text.setText("Condition" + String.valueOf(Utility.getCondition()));
 
             final TextView txt = (TextView) findViewById(R.id.textView);
             txt.setText("Pleasure/Accomplishment");
@@ -184,6 +190,9 @@ public class MainActivity extends Activity {
             });
         } else {
             setContentView(R.layout.input_mood);
+
+            final TextView condition_text = (TextView) findViewById(R.id.textView2);
+            condition_text.setText("Condition" + String.valueOf(Utility.getCondition()));
 
             final TextView txt = (TextView) findViewById(R.id.textView);
             txt.setText("Mood");

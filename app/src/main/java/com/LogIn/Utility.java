@@ -1,6 +1,7 @@
 package com.LogIn;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -21,6 +22,8 @@ public class Utility extends Activity {
     private static String deviceID = "";
     private static String name_datastore = "Logs_";
 
+    private static KeyguardManager.KeyguardLock k1;
+
     public static String LogInType = "Sleepiness";
     public static final int num_days_experiment_length = 18;
     public static final int year_start = 2015;
@@ -29,7 +32,7 @@ public class Utility extends Activity {
     public static int hour_start = 9;
     public static final int num_hour_experiment_length = 12;
     public static int hour_rate = 22;
-    public static String conditions = "123456";
+    public static String conditions = "453621";
     public static String condition_dayoff = "1";
     // Condition:
     // 1: No lockscreen, No notification
@@ -41,11 +44,23 @@ public class Utility extends Activity {
 
     public static List<ParseObject> m_valueList;
 
+    public static void setKeyguardLock(Context context) {
+        KeyguardManager km =(KeyguardManager)context.getSystemService(KEYGUARD_SERVICE);
+        if (k1 == null) k1 = km.newKeyguardLock("IN");
+        if (Utility.needLockscreen()) {
+            k1.disableKeyguard();
+            settingChangedWriteToParse("Disable keyguard, Condition" + getCondition());
+        } else {
+            k1.reenableKeyguard();
+            settingChangedWriteToParse("Reenable keyguard, Condition" + getCondition());
+        }
+    }
+
     public static char getCondition() {
         int i = getDaysDiff();
-        char condition;
+        char condition = '0';
         if (i < 0) i = 0;
-        if (i%3 == 2 || i >= num_days_experiment_length) {
+        if (i%3 == 0 || i >= num_days_experiment_length) {
             condition = condition_dayoff.charAt(0);
         } else {
             condition = conditions.charAt(i/3);
@@ -156,6 +171,7 @@ public class Utility extends Activity {
         parseObj.put("time", new Date());
         parseObj.put("deviceID", deviceID);
         parseObj.put("rate", rate);
+        parseObj.put("condition", String.valueOf(Utility.getCondition()));
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();

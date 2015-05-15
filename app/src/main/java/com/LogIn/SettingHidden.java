@@ -27,12 +27,16 @@ public class SettingHidden extends PreferenceActivity implements SharedPreferenc
         Utility.conditions = SP.getString("pref_key_conditions", "123456");
         Utility.LogInType = SP.getString("pref_key_login_type", "Sleepiness");
 
+        // For identification
+        String email = SP.getString("pref_key_email", "Email");
+
         // For Visualization View
         Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
         Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "1"));
         Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
 
-        String setting = Utility.condition_dayoff + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
+        String setting = email + ", "
+                + Utility.condition_dayoff + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
                 + Utility.month_start + ", " + Utility.day_start + ", " + Utility.hour_start + ", "
                 + Utility.hour_rate;
         Utility.settingChangedWriteToParse(setting);

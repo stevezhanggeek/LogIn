@@ -15,27 +15,27 @@
         <EditTextPreference
             android:key="pref_key_conditions"
             android:title="Conditions"
-            android:dialogTitle="Title"
-            android:dialogMessage="Message"
             android:defaultValue="123456" />
         <EditTextPreference
             android:key="pref_key_start_month"
             android:title="Start Month"
-            android:dialogTitle="Title"
-            android:dialogMessage="Message"
             android:defaultValue="5" />
         <EditTextPreference
             android:key="pref_key_start_day"
             android:title="Start Day"
-            android:dialogTitle="Title"
-            android:dialogMessage="Message"
             android:defaultValue="1" />
         <EditTextPreference
             android:key="pref_key_start_hour"
             android:title="Start Hour"
-            android:dialogTitle="Title"
-            android:dialogMessage="Message"
             android:defaultValue="9" />
+        <EditTextPreference
+            android:key="pref_key_rate_hour"
+            android:title="Time For End-of-day Survey"
+            android:defaultValue="22" />
+        <EditTextPreference
+            android:key="pref_key_email"
+            android:title="Email"
+            android:defaultValue="Email" />
     </PreferenceCategory>
 
 </PreferenceScreen>

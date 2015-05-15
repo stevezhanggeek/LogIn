@@ -25,7 +25,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="20dp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -33,6 +33,16 @@
                 android:id="@+id/imageView"
                 android:src="@drawable/preview_condition_1"
                 android:adjustViewBounds="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Intrusive"
+                android:id="@+id/slider_text"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -44,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Minimal Intrusive"
+                    android:text="Minimal"
                     android:textColor="#FFF"
                     android:layout_weight="1"
                     android:gravity="left" />
@@ -53,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Extreme Intrusive"
+                    android:text="Extreme"
                     android:layout_weight="1"
                     android:textColor="#FFF"
                     android:gravity="right"/>

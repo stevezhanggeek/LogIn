@@ -20,13 +20,15 @@ public class AlarmReceiverNotification extends WakefulBroadcastReceiver {
   
     @Override
     public void onReceive(Context context, Intent intent) {
+        Utility.setKeyguardLock(context);
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        System.out.println(Utility.hour_start);
         if (!Utility.needNotification()
                 || hour < Utility.hour_start
                 || hour >= Math.min(Utility.hour_start + Utility.num_hour_experiment_length, 23)) {
+            Utility.notificationWriteToParse("NotificationHidden", "");
             return;
         }
 

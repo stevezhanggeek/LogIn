@@ -45,12 +45,55 @@ public class RateAlert extends Activity {
         description += "\nPlease rate intrusiveness of LogIn\nUnder condition ";
         description += Utility.getCondition();
         txt.setText(description);
+        /*
+        if (Utility.needLockscreen()) {
+            description += "Customized Lockscreen\n";
+        } else {
+            description += "Original Lockscreen\n";
+        }
+        if (Utility.needNotification()) {
+            if (Utility.needNotificationSound()) {
+                description += "Notification with Sound\n";
+            } else {
+                description += "Notification without Sound\n";
+            }
+        } else {
+            description += "No Notification\n";
+        }*/
 
         final ImageView image_view = (ImageView) findViewById(R.id.imageView);
-
-        image_view.setImageResource(R.drawable.preview_condition_1);
+        if (Utility.getCondition() == '1') {
+            image_view.setImageResource(R.drawable.preview_condition_1);
+        } else if (Utility.getCondition() == '2') {
+            image_view.setImageResource(R.drawable.preview_condition_2);
+        } else if (Utility.getCondition() == '3') {
+            image_view.setImageResource(R.drawable.preview_condition_3);
+        } else if (Utility.getCondition() == '4') {
+            image_view.setImageResource(R.drawable.preview_condition_4);
+        } else if (Utility.getCondition() == '5') {
+            image_view.setImageResource(R.drawable.preview_condition_5);
+        } else if (Utility.getCondition() == '6') {
+            image_view.setImageResource(R.drawable.preview_condition_6);
+        }
 
         final SeekBar seek_bar = (SeekBar) findViewById(R.id.seekBar);
+
+        seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                final TextView slider_text = (TextView) findViewById(R.id.slider_text);
+                slider_text.setText(Utility.convertScaleValueToAdj(progress+1) + " Intrusive");
+            }
+        });
 
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {

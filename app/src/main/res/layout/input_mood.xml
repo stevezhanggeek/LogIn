@@ -45,4 +45,11 @@
         android:src="@drawable/mood_grid"
         android:layout_below="@+id/textView" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Condition"
+        android:id="@+id/textView2"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
