@@ -77,7 +77,7 @@ public class RateAlert extends Activity {
         }
 
         final SeekBar seek_bar = (SeekBar) findViewById(R.id.seekBar);
-
+        seek_bar.setVisibility(View.VISIBLE);
         seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -91,15 +91,18 @@ public class RateAlert extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 final TextView slider_text = (TextView) findViewById(R.id.slider_text);
-                slider_text.setText(Utility.convertScaleValueToAdj(progress+1) + " Intrusive");
+                slider_text.setText(Utility.convertScaleValueToAdj(progress + 1) + " Intrusive");
             }
         });
 
-        Button btn = (Button) findViewById(R.id.button);
+        final Button btn = (Button) findViewById(R.id.button);
+        btn.setVisibility(View.VISIBLE);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Utility.rateWriteToParse(seek_bar.getProgress() + 1);
                 txt.setText("Thanks for your rating!\nThis screen will be closed now.");
+                btn.setVisibility(View.INVISIBLE);
+                seek_bar.setVisibility(View.INVISIBLE);
 
                 // Exit rate alert after 3 seconds
                 final Handler handler = new Handler();

@@ -6,9 +6,9 @@
         android:title="Personal Preference"
         android:key="pref_key_storage_settings">
         <ListPreference
-            android:key="pref_key_dayoff_condition"
+            android:key="pref_key_firstday_condition"
             android:summary=""
-            android:title="Interface For Non-Study Days"
+            android:title="Interface for first day"
             android:defaultValue="1"
             android:entries="@array/list_condition_description"
             android:entryValues="@array/list_condition_value"/>

@@ -49,11 +49,6 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void openHiddenSettings() {
-        Intent intent = new Intent(this, SettingHidden.class);
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -71,9 +66,6 @@ public class MainActivity extends Activity {
                 return true;
             case R.id.action_settings:
                 openSettings();
-                return true;
-            case R.id.action_hiddensettings:
-                openHiddenSettings();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -93,16 +85,11 @@ public class MainActivity extends Activity {
         alarm_notification.setNotificationAlarm(this);
 
         // Setup Rate Alert
-        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
         AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
         alarm_rating.setRatingAlarm(this);
 
         if (Utility.LogInType.equals("Sleepiness")) {
             setContentView(R.layout.input_sleepiness);
-
-            final TextView condition_text = (TextView) findViewById(R.id.textView2);
-            condition_text.setText("Condition" + String.valueOf(Utility.getCondition()));
 
             final TextView txt = (TextView) findViewById(R.id.textView);
             txt.setText("Sleepiness");
@@ -143,9 +130,6 @@ public class MainActivity extends Activity {
             });
         } else if (Utility.LogInType.equals("Depression")) {
             setContentView(R.layout.input_depression);
-
-            final TextView condition_text = (TextView) findViewById(R.id.textView2);
-            condition_text.setText("Condition" + String.valueOf(Utility.getCondition()));
 
             final TextView txt = (TextView) findViewById(R.id.textView);
             txt.setText("Pleasure/Accomplishment");
@@ -196,9 +180,6 @@ public class MainActivity extends Activity {
             });
         } else {
             setContentView(R.layout.input_mood);
-
-            final TextView condition_text = (TextView) findViewById(R.id.textView2);
-            condition_text.setText("Condition" + String.valueOf(Utility.getCondition()));
 
             final TextView txt = (TextView) findViewById(R.id.textView);
             txt.setText("Mood");

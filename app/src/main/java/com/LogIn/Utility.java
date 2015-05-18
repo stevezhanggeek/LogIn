@@ -20,20 +20,20 @@ import java.util.UUID;
 
 public class Utility extends Activity {
     private static String deviceID = "";
-    private static String name_datastore = "Logs_";
+    private static String name_datastore = "New_";
 
     private static KeyguardManager.KeyguardLock k1;
 
     public static String LogInType = "Sleepiness";
     public static final int num_days_experiment_length = 18;
     public static final int year_start = 2015;
-    public static int month_start = 4; // start from 0
-    public static int day_start = 1;
+    public static final int month_start = 4; // start from 0
+    public static int day_start = 18;
     public static int hour_start = 9;
     public static final int num_hour_experiment_length = 12;
-    public static int hour_rate = 22;
     public static String conditions = "453621";
-    public static String condition_dayoff = "1";
+    public static String condition_firstday = "6";
+    public static final String version = "1.05";
     // Condition:
     // 1: No lockscreen, No notification
     // 2: No lockscreen, Notification no sound
@@ -58,14 +58,12 @@ public class Utility extends Activity {
 
     public static char getCondition() {
         int i = getDaysDiff();
-        char condition = '0';
-        if (i < 0) i = 0;
-        if (i%3 == 0 || i >= num_days_experiment_length) {
-            condition = condition_dayoff.charAt(0);
+        System.out.println(i);
+        if (i <= 0 || i >= num_days_experiment_length) {
+            return condition_firstday.charAt(0);
         } else {
-            condition = conditions.charAt(i/3);
+            return conditions.charAt((i-1)/2);
         }
-        return condition;
     }
 
     public static boolean needLockscreen() {
@@ -104,24 +102,28 @@ public class Utility extends Activity {
         return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
     }
 
-    public static void initParameters() {
+    public static void initSettings(Context context) {
         // Parse doesn't allow "-" in object name
         deviceID = getUniquePsuedoID().replace("-", "");
         name_datastore = name_datastore + deviceID;
-    }
 
-    public static void initSettings(Context context) {
-        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(context);
-
-        // LogIn basic setup
-        Utility.condition_dayoff = SP.getString("pref_key_dayoff_condition", "1");
-        Utility.conditions = SP.getString("pref_key_conditions", "123456");
-        Utility.LogInType = SP.getString("pref_key_login_type", "Sleepiness");
-
-        // For Visualization View
-        Utility.month_start = Integer.parseInt(SP.getString("pref_key_start_month", "5")) - 1;
-        Utility.day_start = Integer.parseInt(SP.getString("pref_key_start_day", "1"));
-        Utility.hour_start = Integer.parseInt(SP.getString("pref_key_start_hour", "9"));
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Parameters");
+        query.whereEqualTo("deviceID", deviceID);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    Utility.conditions = objects.get(0).getString("conditions");
+                    Utility.LogInType = objects.get(0).getString("LogInType");
+                    Utility.day_start = objects.get(0).getInt("day_start");
+                    Utility.hour_start = objects.get(0).getInt("hour_start");
+                    String setting = getCondition() + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
+                            + Utility.day_start + ", " + Utility.hour_start;
+                    System.out.println(setting);
+                } else {
+                    System.out.println("WTH");
+                }
+            }
+        });
     }
 
     public static void sleepinessWriteToParse(String input_source, int value) {
@@ -175,6 +177,9 @@ public class Utility extends Activity {
         parseObj.put("time", new Date());
         parseObj.put("action", action);
         parseObj.put("notification_mode", notification_mode);
+        String setting = getCondition() + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
+                + Utility.month_start + ", " + Utility.day_start + ", " + Utility.hour_start;
+        parseObj.put("settings", setting);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();
@@ -186,6 +191,9 @@ public class Utility extends Activity {
         parseObj.put("deviceID", deviceID);
         parseObj.put("rate", rate);
         parseObj.put("condition", String.valueOf(Utility.getCondition()));
+        String setting = getCondition() + ", " + Utility.conditions + ", " + Utility.LogInType + ", "
+                + Utility.month_start + ", " + Utility.day_start + ", " + Utility.hour_start;
+        parseObj.put("settings", setting);
         parseObj.saveInBackground();
         parseObj.pinInBackground();
         parseObj.saveEventually();

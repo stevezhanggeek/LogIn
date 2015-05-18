@@ -24,10 +24,9 @@ public class Setting extends PreferenceActivity implements SharedPreferences.OnS
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         // LogIn basic setup
-        Utility.condition_dayoff = SP.getString("pref_key_dayoff_condition", "1");
+        Utility.condition_firstday = SP.getString("pref_key_firstday_condition", "6");
 
         // Setup Rate Alert
-        Utility.hour_rate = Integer.parseInt(SP.getString("pref_key_rate_hour", "22"));
         AlarmReceiverRating alarm_rating = new AlarmReceiverRating();
         alarm_rating.setRatingAlarm(this);
 
